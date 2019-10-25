@@ -10,7 +10,6 @@
 		72A6D3D8236366820048D324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3D7236366820048D324 /* AppDelegate.swift */; };
 		72A6D3E0236366820048D324 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3DE236366820048D324 /* NewsApp.xcdatamodeld */; };
 		72A6D3E2236367750048D324 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72A6D3E1236367750048D324 /* Assets.xcassets */; };
-		72A6D3EE23636E2C0048D324 /* InitialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3ED23636E2C0048D324 /* InitialController.swift */; };
 		72A6D3F1236379D10048D324 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6D3F0236379D10048D324 /* Alamofire.framework */; };
 		72A6D3F3236379D50048D324 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6D3F2236379D50048D324 /* SwiftyJSON.framework */; };
 		72A6D3F5236379DA0048D324 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6D3F4236379D90048D324 /* SwipeCellKit.framework */; };
@@ -27,7 +26,6 @@
 		72A6D3DF236366820048D324 /* NewsApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsApp.xcdatamodel; sourceTree = "<group>"; };
 		72A6D3E1236367750048D324 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72A6D3E6236367750048D324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72A6D3ED23636E2C0048D324 /* InitialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialController.swift; sourceTree = "<group>"; };
 		72A6D3F0236379D10048D324 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		72A6D3F2236379D50048D324 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		72A6D3F4236379D90048D324 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
@@ -89,7 +87,6 @@
 				72A6D3F823637CA20048D324 /* DetailsController.swift */,
 				72A6D3FA23637CA30048D324 /* ResultsControllers.swift */,
 				72A6D3F923637CA30048D324 /* SearchController.swift */,
-				72A6D3ED23636E2C0048D324 /* InitialController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,7 +214,6 @@
 				72A6D40423637DBD0048D324 /* New.swift in Sources */,
 				72A6D3FB23637CA30048D324 /* DetailsController.swift in Sources */,
 				72A6D3FC23637CA30048D324 /* SearchController.swift in Sources */,
-				72A6D3EE23636E2C0048D324 /* InitialController.swift in Sources */,
 				72A6D3D8236366820048D324 /* AppDelegate.swift in Sources */,
 				72A6D40623637DC80048D324 /* NewsViewCell.swift in Sources */,
 				72A6D3FD23637CA30048D324 /* ResultsControllers.swift in Sources */,

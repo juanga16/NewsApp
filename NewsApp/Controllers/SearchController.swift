@@ -24,32 +24,34 @@ class SearchController: UIViewController {
         view.addSubview(termTextField)
         view.addSubview(searchButton)
         
+        let elementsLeft = 30
+        let elementsTopMargin = 30
+        
         // News finder label
         newsFinderLabel.text = "Find news about you want"
         newsFinderLabel.textColor = .black
         newsFinderLabel.font = UIFont.systemFont(ofSize: 25)
         newsFinderLabel.snp.updateConstraints {
             (make) in
-            make.top.equalTo(self.view).inset(100)
-            make.left.equalTo(self.view).inset(50)
+            make.left.equalTo(self.view).offset(elementsLeft)
+            make.top.equalTo(self.view).offset(elementsTopMargin + 50)
         }
-        //newsFinderLabel.snp.translatesAutoresizingMaskIntoConstraints = false
         
         // Enter term label
         enterTermLabel.text = "Enter a term"
         enterTermLabel.textColor = .black
         enterTermLabel.snp.updateConstraints {
             (make) in
-            make.top.equalTo(self.view).inset(200)
-            make.left.equalTo(self.view).inset(50)
+            make.left.equalTo(self.view).offset(elementsLeft)
+            make.top.equalTo(newsFinderLabel.snp.bottom).offset(elementsTopMargin)
         }
         
         // Term text field
         termTextField.text = ""
         termTextField.snp.updateConstraints {
             (make) in
-            make.top.equalTo(self.view).inset(300)
-            make.left.equalTo(self.view).inset(50)
+            make.left.equalTo(self.view).offset(elementsLeft)
+            make.top.equalTo(enterTermLabel.snp.bottom).offset(elementsTopMargin)
         }
         
         let defaults = UserDefaults.standard
@@ -64,8 +66,8 @@ class SearchController: UIViewController {
         searchButton.setTitleColor(.blue, for: .normal)
         searchButton.snp.updateConstraints {
             (make) in
-            make.top.equalTo(self.view).inset(400)
-            make.left.equalTo(self.view).inset(50)
+            make.left.equalTo(self.view).offset(elementsLeft)
+            make.top.equalTo(termTextField.snp.bottom).offset(elementsTopMargin)
         }
         searchButton.addTarget(self, action: #selector(searchButtonWasPressed), for: .touchUpInside)
     }
@@ -73,9 +75,7 @@ class SearchController: UIViewController {
     @objc func searchButtonWasPressed(_ sender: Any) {
         if termTextField.text == "" {
             let alert = UIAlertController(title: "News Finder", message: "Please enter term to be searched", preferredStyle: .actionSheet)
-            
             let acceptAction = UIAlertAction(title: "Accept", style: .cancel, handler: nil)
-            
             alert.addAction(acceptAction)
             
             present(alert, animated: true, completion: nil)
