@@ -13,6 +13,14 @@
 		72A6D3E2236367750048D324 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72A6D3E1236367750048D324 /* Assets.xcassets */; };
 		72A6D3E5236367750048D324 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72A6D3E3236367750048D324 /* LaunchScreen.storyboard */; };
 		72A6D3EE23636E2C0048D324 /* InitialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3ED23636E2C0048D324 /* InitialController.swift */; };
+		72A6D3F1236379D10048D324 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6D3F0236379D10048D324 /* Alamofire.framework */; };
+		72A6D3F3236379D50048D324 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6D3F2236379D50048D324 /* SwiftyJSON.framework */; };
+		72A6D3F5236379DA0048D324 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A6D3F4236379D90048D324 /* SwipeCellKit.framework */; };
+		72A6D3FB23637CA30048D324 /* DetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3F823637CA20048D324 /* DetailsController.swift */; };
+		72A6D3FC23637CA30048D324 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3F923637CA30048D324 /* SearchController.swift */; };
+		72A6D3FD23637CA30048D324 /* ResultsControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3FA23637CA30048D324 /* ResultsControllers.swift */; };
+		72A6D40423637DBD0048D324 /* New.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D40323637DBD0048D324 /* New.swift */; };
+		72A6D40623637DC80048D324 /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D40523637DC80048D324 /* NewsViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +32,14 @@
 		72A6D3E4236367750048D324 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72A6D3E6236367750048D324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72A6D3ED23636E2C0048D324 /* InitialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialController.swift; sourceTree = "<group>"; };
+		72A6D3F0236379D10048D324 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		72A6D3F2236379D50048D324 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		72A6D3F4236379D90048D324 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
+		72A6D3F823637CA20048D324 /* DetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsController.swift; sourceTree = "<group>"; };
+		72A6D3F923637CA30048D324 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		72A6D3FA23637CA30048D324 /* ResultsControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsControllers.swift; sourceTree = "<group>"; };
+		72A6D40323637DBD0048D324 /* New.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = New.swift; sourceTree = "<group>"; };
+		72A6D40523637DC80048D324 /* NewsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +47,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72A6D3F1236379D10048D324 /* Alamofire.framework in Frameworks */,
+				72A6D3F3236379D50048D324 /* SwiftyJSON.framework in Frameworks */,
+				72A6D3F5236379DA0048D324 /* SwipeCellKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +61,7 @@
 			children = (
 				72A6D3D6236366820048D324 /* NewsApp */,
 				72A6D3D5236366820048D324 /* Products */,
+				72A6D3EF236379D10048D324 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +76,8 @@
 		72A6D3D6236366820048D324 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				72A6D40223637D3E0048D324 /* Views */,
+				72A6D40123637D340048D324 /* Models */,
 				72A6D3EC23636DF50048D324 /* Controllers */,
 				72A6D3D7236366820048D324 /* AppDelegate.swift */,
 				72A6D3DB236366820048D324 /* Main.storyboard */,
@@ -70,9 +92,38 @@
 		72A6D3EC23636DF50048D324 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				72A6D3F823637CA20048D324 /* DetailsController.swift */,
+				72A6D3FA23637CA30048D324 /* ResultsControllers.swift */,
+				72A6D3F923637CA30048D324 /* SearchController.swift */,
 				72A6D3ED23636E2C0048D324 /* InitialController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		72A6D3EF236379D10048D324 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				72A6D3F4236379D90048D324 /* SwipeCellKit.framework */,
+				72A6D3F2236379D50048D324 /* SwiftyJSON.framework */,
+				72A6D3F0236379D10048D324 /* Alamofire.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		72A6D40123637D340048D324 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				72A6D40323637DBD0048D324 /* New.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		72A6D40223637D3E0048D324 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72A6D40523637DC80048D324 /* NewsViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +136,7 @@
 				72A6D3D0236366820048D324 /* Sources */,
 				72A6D3D1236366820048D324 /* Frameworks */,
 				72A6D3D2236366820048D324 /* Resources */,
+				72A6D3F723637A450048D324 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -141,13 +193,42 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		72A6D3F723637A450048D324 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwipeCellKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		72A6D3D0236366820048D324 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72A6D40423637DBD0048D324 /* New.swift in Sources */,
+				72A6D3FB23637CA30048D324 /* DetailsController.swift in Sources */,
+				72A6D3FC23637CA30048D324 /* SearchController.swift in Sources */,
 				72A6D3EE23636E2C0048D324 /* InitialController.swift in Sources */,
 				72A6D3D8236366820048D324 /* AppDelegate.swift in Sources */,
+				72A6D40623637DC80048D324 /* NewsViewCell.swift in Sources */,
+				72A6D3FD23637CA30048D324 /* ResultsControllers.swift in Sources */,
 				72A6D3E0236366820048D324 /* NewsApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,6 +377,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q67DSM2NHF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = NewsApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -314,6 +399,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q67DSM2NHF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = NewsApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

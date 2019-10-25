@@ -1,0 +1,5 @@
+
+github "Alamofire/Alamofire"
+github "SwipeCellKit/SwipeCellKit"
+github "SwiftyJSON/SwiftyJSON"
+GitHub "SnapKit/SnapKit"

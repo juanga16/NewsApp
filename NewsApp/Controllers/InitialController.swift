@@ -12,12 +12,12 @@ class InitialController: UIViewController {
     
     override func viewDidLoad() {
         view = UIView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .yellow
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hello there"
-        label.textColor = .white
+        label.textColor = .blue
         
         view.addSubview(label)
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

@@ -1,0 +1,4 @@
+github "Alamofire/Alamofire" "4.9.0"
+github "SnapKit/SnapKit" "5.0.1"
+github "SwiftyJSON/SwiftyJSON" "5.0.0"
+github "SwipeCellKit/SwipeCellKit" "2.7.1"
