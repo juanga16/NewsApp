@@ -7,11 +7,70 @@
 //
 
 import UIKit
+import SnapKit
 
 class SearchController: UIViewController {
-    @IBOutlet weak var termTextField: UITextField!
+    let newsFinderLabel = UILabel(frame: .zero)
+    let enterTermLabel =  UILabel(frame: .zero)
+    let termTextField = UITextField(frame: .zero)
+    let searchButton = UIButton(frame: .zero)
     
-    @IBAction func searchButtonWasPressed(_ sender: Any) {
+    override func viewDidLoad() {
+        view = UIView()
+        view.backgroundColor = .white
+        
+        view.addSubview(newsFinderLabel)
+        view.addSubview(enterTermLabel)
+        view.addSubview(termTextField)
+        view.addSubview(searchButton)
+        
+        // News finder label
+        newsFinderLabel.text = "Find news about you want"
+        newsFinderLabel.textColor = .black
+        newsFinderLabel.font = UIFont.systemFont(ofSize: 25)
+        newsFinderLabel.snp.updateConstraints {
+            (make) in
+            make.top.equalTo(self.view).inset(100)
+            make.left.equalTo(self.view).inset(50)
+        }
+        //newsFinderLabel.snp.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Enter term label
+        enterTermLabel.text = "Enter a term"
+        enterTermLabel.textColor = .black
+        enterTermLabel.snp.updateConstraints {
+            (make) in
+            make.top.equalTo(self.view).inset(200)
+            make.left.equalTo(self.view).inset(50)
+        }
+        
+        // Term text field
+        termTextField.text = ""
+        termTextField.snp.updateConstraints {
+            (make) in
+            make.top.equalTo(self.view).inset(300)
+            make.left.equalTo(self.view).inset(50)
+        }
+        
+        let defaults = UserDefaults.standard
+        if let term = defaults.string(forKey: "term") {
+            termTextField.text = term
+        }
+        
+        termTextField.becomeFirstResponder()
+        
+        // Search button
+        searchButton.setTitle("Search", for: .normal)
+        searchButton.setTitleColor(.blue, for: .normal)
+        searchButton.snp.updateConstraints {
+            (make) in
+            make.top.equalTo(self.view).inset(400)
+            make.left.equalTo(self.view).inset(50)
+        }
+        searchButton.addTarget(self, action: #selector(searchButtonWasPressed), for: .touchUpInside)
+    }
+    
+    @objc func searchButtonWasPressed(_ sender: Any) {
         if termTextField.text == "" {
             let alert = UIAlertController(title: "News Finder", message: "Please enter term to be searched", preferredStyle: .actionSheet)
             
@@ -28,24 +87,9 @@ class SearchController: UIViewController {
         let defaults = UserDefaults.standard
         defaults.set(termTextField.text, forKey: "term")
         
-        if let resultsController = storyboard?.instantiateViewController(withIdentifier: "resultsController") as? ResultsController {
+        let resultsController = ResultsController()
+        resultsController.termToSearch = termTextField.text!
             
-            resultsController.termToSearch = termTextField.text!
-            present(resultsController, animated: true, completion: nil)
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        termTextField.text = ""
-        
-        let defaults = UserDefaults.standard
-        if let term = defaults.string(forKey: "term") {
-            termTextField.text = term
-        }
-        
-        termTextField.becomeFirstResponder()
+        present(resultsController, animated: true, completion: nil)
     }
 }

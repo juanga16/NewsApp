@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let initialController = InitialController()
+        let searchController = SearchController()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = initialController
+        window?.rootViewController = searchController
         window?.makeKeyAndVisible()
         
         
