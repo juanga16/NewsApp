@@ -32,16 +32,13 @@ class ResultsController: UIViewController {
         view.addSubview(loadingLabel)
         view.addSubview(tableView)
         
-        let elementsLeft = 30
-        let elementsTopMargin = 30
-        
         // Back button
         backButton.setTitle("< Back", for: .normal)
         backButton.setTitleColor(.blue, for: .normal)
         backButton.snp.updateConstraints {
             (make) in
-            make.left.equalTo(self.view).offset(elementsLeft)
-            make.top.equalTo(self.view).offset(elementsTopMargin + 50)
+            make.left.equalTo(self.view).offset(Constants.elementsLeft)
+            make.top.equalTo(self.view).offset(Constants.elementsTopMargin + 50)
         }
         backButton.addTarget(self, action: #selector(backButtonWasPressed), for: .touchUpInside)
         
@@ -50,10 +47,10 @@ class ResultsController: UIViewController {
         newsRelatedToLabel.textColor = .black
         newsRelatedToLabel.snp.updateConstraints {
             (make) in
-            make.left.equalTo(self.view).offset(elementsLeft)
-            make.top.equalTo(backButton.snp.bottom).offset(elementsTopMargin)
+            make.left.equalTo(self.view).offset(Constants.elementsLeft)
+            make.top.equalTo(backButton.snp.bottom).offset(Constants.elementsTopMargin)
         }
-
+        
         // Term to search label
         termToSearchLabel.text = termToSearch
         termToSearchLabel.textColor = .black
@@ -69,8 +66,8 @@ class ResultsController: UIViewController {
         loadingLabel.textColor = .black
         loadingLabel.snp.updateConstraints {
             (make) in
-            make.left.equalTo(self.view).offset(elementsLeft)
-            make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(elementsTopMargin)
+            make.left.equalTo(self.view).offset(Constants.elementsLeft)
+            make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(Constants.elementsTopMargin)
         }
         
         // Table view
@@ -82,10 +79,10 @@ class ResultsController: UIViewController {
         tableView.register(NewsViewCell.self, forCellReuseIdentifier: "newsViewCell")
         tableView.snp.updateConstraints {
             (make) in
-            make.left.equalTo(self.view).offset(elementsLeft)
-            make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(elementsTopMargin)
-            make.right.equalTo(self.view).offset(-elementsLeft)
-            make.bottom.equalTo(self.view.snp.bottom).offset(-elementsTopMargin)
+            make.left.equalTo(self.view).offset(Constants.elementsLeft)
+            make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(Constants.elementsTopMargin)
+            make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-Constants.elementsTopMargin)
         }
         
         // Get and display results
@@ -199,11 +196,10 @@ extension ResultsController {
     }
     
     func viewDetails(index: Int) {
-        if let detailsController = storyboard?.instantiateViewController(withIdentifier: "detailsController") as? DetailsController {
-            let new = news[index]
+        let detailsController = DetailsController()
+        let new = news[index]
             
-            detailsController.newToShow = new
-            self.present(detailsController, animated: true, completion: nil)
-        }
+        detailsController.newToShow = new
+        self.present(detailsController, animated: true, completion: nil)
     }
 }

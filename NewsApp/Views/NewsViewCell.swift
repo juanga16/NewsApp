@@ -18,14 +18,10 @@ class NewsViewCell: SwipeTableViewCell {
     
     func configure(new: New) {
         titleLabel.text = new.title
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.textAlignment = .justified
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM-dd HH:mm"
         publishedAtLabel.text = dateFormatter.string(from: new.publishedAt)
-        publishedAtLabel.textColor = .black
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -36,9 +32,6 @@ class NewsViewCell: SwipeTableViewCell {
         
         contentView.addSubview(container)
         
-        let elementsTopMargin = 10
-        
-        container.translatesAutoresizingMaskIntoConstraints = false
         container.snp.updateConstraints {
             (make) in
             make.left.equalTo(contentView)
@@ -47,22 +40,24 @@ class NewsViewCell: SwipeTableViewCell {
             make.bottom.equalTo(contentView)
         }
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 0
+        titleLabel.textColor = .black
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.textAlignment = .left
         titleLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(container)
             make.right.equalTo(container)
-            make.top.equalTo(container).offset(elementsTopMargin)
+            make.top.equalTo(container).offset(Constants.elementsTopMargin)
         }
         
-        publishedAtLabel.translatesAutoresizingMaskIntoConstraints = false
         publishedAtLabel.textAlignment = .right
+        publishedAtLabel.textColor = .black
         publishedAtLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(container)
             make.right.equalTo(container)
-            make.top.equalTo(titleLabel.snp.bottom).offset(elementsTopMargin)
+            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.elementsTopMargin)
             make.bottom.equalTo(-10)
         }
     }

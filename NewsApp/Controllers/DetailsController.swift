@@ -7,42 +7,120 @@
 //
 
 import UIKit
+import SnapKit
 
 class DetailsController: UIViewController {
     var newToShow: New?
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var publishedAtLabel: UILabel!
-    @IBOutlet weak var contentLabel: UILabel!
-
-    @IBAction func backButtonWasPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    let backButton = UIButton(frame: .zero)
+    let titleLabel = UILabel(frame: .zero)
+    let descriptionLabel = UILabel(frame: .zero)
+    let authorLabel = UILabel(frame: .zero)
+    let publishedAtLabel = UILabel(frame: .zero)
+    let imageView = UIImageView(frame: .zero)
+    let contentLabel = UILabel(frame: .zero)
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
         if let new = newToShow {
-            titleLabel.text = new.title
-            authorLabel.text = "By " + new.author
-            descriptionLabel.text = new.description
+            view = UIView()
+            view.backgroundColor = .white
             
-            if new.urlToImage != "" {
-                loadImage(urlToImage: new.urlToImage)
-            } else {
-                imageView.isHidden = true
+            view.addSubview(backButton)
+            view.addSubview(titleLabel)
+            view.addSubview(descriptionLabel)
+            view.addSubview(authorLabel)
+            view.addSubview(publishedAtLabel)
+            view.addSubview(imageView)
+            view.addSubview(contentLabel)
+            
+            // Back button
+            backButton.setTitle("< Back", for: .normal)
+            backButton.setTitleColor(.blue, for: .normal)
+            backButton.snp.updateConstraints {
+                (make) in
+                make.left.equalTo(self.view).offset(Constants.elementsLeft)
+                make.top.equalTo(self.view).offset(Constants.elementsTopMargin + 50)
+            }
+            backButton.addTarget(self, action: #selector(backButtonWasPressed), for: .touchUpInside)
+            
+            // Title label
+            titleLabel.text = new.title
+            titleLabel.textColor = .black
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            titleLabel.numberOfLines = 0
+            titleLabel.textAlignment = .justified
+            titleLabel.snp.updateConstraints {
+                (make) in
+                make.left.equalTo(self.view).offset(Constants.elementsLeft)
+                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.top.equalTo(backButton.snp.bottom).offset(Constants.elementsTopMargin)
             }
             
+            // Description label
+            descriptionLabel.text = new.description
+            descriptionLabel.textAlignment = .justified
+            descriptionLabel.font = UIFont.italicSystemFont(ofSize: 17)
+            descriptionLabel.textColor = .black
+            descriptionLabel.numberOfLines = 0
+            descriptionLabel.snp.updateConstraints {
+                (make) in
+                make.left.equalTo(self.view).offset(Constants.elementsLeft)
+                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.top.equalTo(titleLabel.snp.bottom).offset(Constants.elementsTopMargin)
+            }
+            
+            // Author label
+            authorLabel.text = new.author
+            authorLabel.lineBreakMode = .byTruncatingTail
+            authorLabel.snp.updateConstraints {
+                (make) in
+                make.left.equalTo(self.view).offset(Constants.elementsLeft)
+                make.top.equalTo(descriptionLabel.snp.bottom).offset(Constants.elementsTopMargin)
+                make.width.lessThanOrEqualTo(250)
+            }
+            
+            // Published at label
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM-dd HH:mm"
             publishedAtLabel.text = dateFormatter.string(from: new.publishedAt)
+            publishedAtLabel.textAlignment = .right
+            publishedAtLabel.snp.updateConstraints {
+                (make) in
+                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.top.equalTo(authorLabel.snp.top)
+            }
             
+            // Image view
+            imageView.isHidden = true
+            imageView.contentMode = .scaleAspectFit
+            imageView.snp.updateConstraints {
+                (make) in
+                make.left.equalTo(self.view).offset(Constants.elementsLeft)
+                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.width.equalTo(self.view).offset(-Constants.elementsLeft*2)
+                make.height.equalTo(100)
+                make.top.equalTo(publishedAtLabel.snp.bottom).offset(Constants.elementsTopMargin)
+            }
+            
+            if new.urlToImage != "" {
+                loadImage(urlToImage: new.urlToImage)
+            }
+            
+            // Content label
             contentLabel.text = new.content
+            contentLabel.numberOfLines = 0
+            contentLabel.textAlignment = .justified
+            contentLabel.snp.updateConstraints {
+                (make) in
+                make.left.equalTo(self.view).offset(Constants.elementsLeft)
+                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.top.equalTo(imageView.snp.bottom).offset(Constants.elementsTopMargin)
+            }
         }
+    }
+    
+    @objc func backButtonWasPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -82,7 +160,16 @@ extension DetailsController {
     
     func showImage(image: UIImage) {
         DispatchQueue.main.async() {
+            let widthRelation = image.size.width / self.imageView.frame.width
+            let imageHeight = image.size.height / widthRelation
+            
             self.imageView.image = image
+            self.imageView.isHidden = false
+            self.imageView.snp.updateConstraints {
+                (make) in
+                make.height.equalTo(imageHeight)
+            }
+            self.imageView.backgroundColor = .yellow
         }
     }
 }

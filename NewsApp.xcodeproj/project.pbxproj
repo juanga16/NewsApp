@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7256511F236732690068E29D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256511E236732690068E29D /* Constants.swift */; };
+		7256512223675E010068E29D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256512123675E010068E29D /* UITextField.swift */; };
 		72A6D3D8236366820048D324 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3D7236366820048D324 /* AppDelegate.swift */; };
 		72A6D3E0236366820048D324 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3DE236366820048D324 /* NewsApp.xcdatamodeld */; };
 		72A6D3E2236367750048D324 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72A6D3E1236367750048D324 /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7256511E236732690068E29D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7256512123675E010068E29D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		72A6D3D4236366820048D324 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72A6D3D7236366820048D324 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72A6D3DF236366820048D324 /* NewsApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsApp.xcdatamodel; sourceTree = "<group>"; };
@@ -50,6 +54,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7256511D2367322B0068E29D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7256511E236732690068E29D /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7256512023675DD00068E29D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7256512123675E010068E29D /* UITextField.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		72A6D3CB236366820048D324 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +90,8 @@
 		72A6D3D6236366820048D324 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				7256512023675DD00068E29D /* Extensions */,
+				7256511D2367322B0068E29D /* Helpers */,
 				72A6D40223637D3E0048D324 /* Views */,
 				72A6D40123637D340048D324 /* Models */,
 				72A6D3EC23636DF50048D324 /* Controllers */,
@@ -213,11 +235,13 @@
 			files = (
 				72A6D40423637DBD0048D324 /* New.swift in Sources */,
 				72A6D3FB23637CA30048D324 /* DetailsController.swift in Sources */,
+				7256512223675E010068E29D /* UITextField.swift in Sources */,
 				72A6D3FC23637CA30048D324 /* SearchController.swift in Sources */,
 				72A6D3D8236366820048D324 /* AppDelegate.swift in Sources */,
 				72A6D40623637DC80048D324 /* NewsViewCell.swift in Sources */,
 				72A6D3FD23637CA30048D324 /* ResultsControllers.swift in Sources */,
 				72A6D3E0236366820048D324 /* NewsApp.xcdatamodeld in Sources */,
+				7256511F236732690068E29D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
