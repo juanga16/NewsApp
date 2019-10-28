@@ -38,8 +38,8 @@ class DetailsController: UIViewController {
             backButton.setTitleColor(.blue, for: .normal)
             backButton.snp.updateConstraints {
                 (make) in
-                make.left.equalTo(self.view).offset(Constants.elementsLeft)
-                make.top.equalTo(self.view).offset(Constants.elementsTopMargin + 50)
+                make.left.equalTo(view).offset(Constants.elementsLeft)
+                make.top.equalTo(view).offset(Constants.elementsTopMargin + 50)
             }
             backButton.addTarget(self, action: #selector(backButtonWasPressed), for: .touchUpInside)
             
@@ -51,8 +51,8 @@ class DetailsController: UIViewController {
             titleLabel.textAlignment = .justified
             titleLabel.snp.updateConstraints {
                 (make) in
-                make.left.equalTo(self.view).offset(Constants.elementsLeft)
-                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.left.equalTo(view).offset(Constants.elementsLeft)
+                make.right.equalTo(view).offset(-Constants.elementsLeft)
                 make.top.equalTo(backButton.snp.bottom).offset(Constants.elementsTopMargin)
             }
             
@@ -64,8 +64,8 @@ class DetailsController: UIViewController {
             descriptionLabel.numberOfLines = 0
             descriptionLabel.snp.updateConstraints {
                 (make) in
-                make.left.equalTo(self.view).offset(Constants.elementsLeft)
-                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.left.equalTo(view).offset(Constants.elementsLeft)
+                make.right.equalTo(view).offset(-Constants.elementsLeft)
                 make.top.equalTo(titleLabel.snp.bottom).offset(Constants.elementsTopMargin)
             }
             
@@ -74,7 +74,7 @@ class DetailsController: UIViewController {
             authorLabel.lineBreakMode = .byTruncatingTail
             authorLabel.snp.updateConstraints {
                 (make) in
-                make.left.equalTo(self.view).offset(Constants.elementsLeft)
+                make.left.equalTo(view).offset(Constants.elementsLeft)
                 make.top.equalTo(descriptionLabel.snp.bottom).offset(Constants.elementsTopMargin)
                 make.width.lessThanOrEqualTo(250)
             }
@@ -86,7 +86,7 @@ class DetailsController: UIViewController {
             publishedAtLabel.textAlignment = .right
             publishedAtLabel.snp.updateConstraints {
                 (make) in
-                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.right.equalTo(view).offset(-Constants.elementsLeft)
                 make.top.equalTo(authorLabel.snp.top)
             }
             
@@ -95,9 +95,9 @@ class DetailsController: UIViewController {
             imageView.contentMode = .scaleAspectFit
             imageView.snp.updateConstraints {
                 (make) in
-                make.left.equalTo(self.view).offset(Constants.elementsLeft)
-                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
-                make.width.equalTo(self.view).offset(-Constants.elementsLeft*2)
+                make.left.equalTo(view).offset(Constants.elementsLeft)
+                make.right.equalTo(view).offset(-Constants.elementsLeft)
+                make.width.equalTo(view).offset(-Constants.elementsLeft*2)
                 make.height.equalTo(100)
                 make.top.equalTo(publishedAtLabel.snp.bottom).offset(Constants.elementsTopMargin)
             }
@@ -112,8 +112,8 @@ class DetailsController: UIViewController {
             contentLabel.textAlignment = .justified
             contentLabel.snp.updateConstraints {
                 (make) in
-                make.left.equalTo(self.view).offset(Constants.elementsLeft)
-                make.right.equalTo(self.view).offset(-Constants.elementsLeft)
+                make.left.equalTo(view).offset(Constants.elementsLeft)
+                make.right.equalTo(view).offset(-Constants.elementsLeft)
                 make.top.equalTo(imageView.snp.bottom).offset(Constants.elementsTopMargin)
             }
         }
