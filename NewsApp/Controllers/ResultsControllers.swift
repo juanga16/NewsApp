@@ -10,28 +10,90 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SwipeCellKit
+import SnapKit
 
 class ResultsController: UIViewController {
     var news: [New] = []
     var termToSearch: String = ""
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var termToSearchLabel: UILabel!
-    @IBOutlet weak var loadingLabel: UILabel!
-    
-    @IBAction func backButtonWasPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    let backButton = UIButton(frame: .zero)
+    let newsRelatedToLabel = UILabel(frame: .zero)
+    let termToSearchLabel = UILabel(frame: .zero)
+    let loadingLabel = UILabel(frame: .zero)
+    let tableView = UITableView(frame: .zero)
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view = UIView()
+        view.backgroundColor = .white
+        
+        view.addSubview(backButton)
+        view.addSubview(newsRelatedToLabel)
+        view.addSubview(termToSearchLabel)
+        view.addSubview(loadingLabel)
+        view.addSubview(tableView)
+        
+        let elementsLeft = 30
+        let elementsTopMargin = 30
+        
+        // Back button
+        backButton.setTitle("< Back", for: .normal)
+        backButton.setTitleColor(.blue, for: .normal)
+        backButton.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(self.view).offset(elementsLeft)
+            make.top.equalTo(self.view).offset(elementsTopMargin + 50)
+        }
+        backButton.addTarget(self, action: #selector(backButtonWasPressed), for: .touchUpInside)
+        
+        // News related to label
+        newsRelatedToLabel.text = "News related to:"
+        newsRelatedToLabel.textColor = .black
+        newsRelatedToLabel.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(self.view).offset(elementsLeft)
+            make.top.equalTo(backButton.snp.bottom).offset(elementsTopMargin)
+        }
+
+        // Term to search label
+        termToSearchLabel.text = termToSearch
+        termToSearchLabel.textColor = .black
+        termToSearchLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        termToSearchLabel.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(newsRelatedToLabel.snp.right).offset(10)
+            make.top.equalTo(newsRelatedToLabel.snp.top)
+        }
+        
+        // Loading label
+        loadingLabel.text = "Loading ..."
+        loadingLabel.textColor = .black
+        loadingLabel.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(self.view).offset(elementsLeft)
+            make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(elementsTopMargin)
+        }
+        
+        // Table view
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.isHidden = true
-
-        termToSearchLabel.text = termToSearch
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(NewsViewCell.self, forCellReuseIdentifier: "newsViewCell")
+        tableView.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(self.view).offset(elementsLeft)
+            make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(elementsTopMargin)
+            make.right.equalTo(self.view).offset(-elementsLeft)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-elementsTopMargin)
+        }
+        
+        // Get and display results
         getNews()
+    }
+
+    @objc func backButtonWasPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -44,15 +106,8 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsViewCell") as! NewsViewCell
         let new = news[indexPath.row]
         
-        let colorBlue = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-        var foreColor = colorBlue
-        
-        if indexPath.row % 2 == 1 {
-            foreColor = UIColor.black
-        }
-        
         cell.delegate = self
-        cell.configure(new: new, foreColor: foreColor)
+        cell.configure(new: new)
         
         return cell
     }
