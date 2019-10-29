@@ -35,7 +35,7 @@ class DetailsController: UIViewController {
             
             // Back button
             backButton.setTitle("< Back", for: .normal)
-            backButton.setTitleColor(.blue, for: .normal)
+            backButton.setTitleColor(.systemBlue, for: .normal)
             backButton.snp.updateConstraints {
                 (make) in
                 make.left.equalTo(view).offset(Constants.elementsLeft)

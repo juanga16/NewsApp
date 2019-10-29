@@ -19,15 +19,19 @@ class SearchController: UIViewController {
         view = UIView()
         view.backgroundColor = .white
         
+        let centeredView = UIStackView(frame: .zero)
+        
         view.addSubview(newsFinderLabel)
         view.addSubview(enterTermLabel)
-        view.addSubview(termTextField)
-        view.addSubview(searchButton)
+        view.addSubview(centeredView)
+        
+        centeredView.addArrangedSubview(termTextField)
+        centeredView.addArrangedSubview(searchButton)
         
         // News finder label
         newsFinderLabel.text = "NEWS OF THE WORLD"
         newsFinderLabel.textColor = .black
-        newsFinderLabel.font = UIFont.systemFont(ofSize: 35)
+        newsFinderLabel.font = UIFont.systemFont(ofSize: 38)
         newsFinderLabel.snp.updateConstraints {
             (make) in
             make.centerX.equalTo(view)
@@ -40,7 +44,19 @@ class SearchController: UIViewController {
         enterTermLabel.snp.updateConstraints {
             (make) in
             make.centerX.equalTo(view)
-            make.top.equalTo(newsFinderLabel.snp.bottom).offset(Constants.elementsTopMargin)
+            make.top.equalTo(newsFinderLabel.snp.bottom).offset(50)
+        }
+        
+        // Centered view
+        centeredView.distribution = .equalCentering
+        centeredView.alignment = .center
+        centeredView.axis = .horizontal
+        centeredView.snp.updateConstraints {
+            make in
+            
+            make.left.equalTo(view).offset(Constants.elementsLeft*2)
+            make.right.equalTo(view).offset(-Constants.elementsLeft*2)
+            make.top.equalTo(enterTermLabel.snp.top).offset(75)
         }
         
         // Term text field
@@ -51,8 +67,7 @@ class SearchController: UIViewController {
         termTextField.setRightPaddingPoints(10)
         termTextField.snp.updateConstraints {
             (make) in
-            make.left.equalTo(view).offset(Constants.elementsLeft)
-            make.top.equalTo(enterTermLabel.snp.bottom).offset(Constants.elementsTopMargin)
+            
             make.width.equalTo(200)
             make.height.equalTo(34)
         }
@@ -66,12 +81,7 @@ class SearchController: UIViewController {
         
         // Search button
         searchButton.setTitle("Search", for: .normal)
-        searchButton.setTitleColor(.blue, for: .normal)
-        searchButton.snp.updateConstraints {
-            (make) in
-            make.right.equalTo(view).offset(-Constants.elementsLeft)
-            make.top.equalTo(enterTermLabel.snp.bottom).offset(Constants.elementsTopMargin)
-        }
+        searchButton.setTitleColor(.systemBlue, for: .normal)
         searchButton.addTarget(self, action: #selector(searchButtonWasPressed), for: .touchUpInside)
     }
     

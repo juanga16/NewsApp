@@ -34,7 +34,7 @@ class ResultsController: UIViewController {
         
         // Back button
         backButton.setTitle("< Back", for: .normal)
-        backButton.setTitleColor(.blue, for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
         backButton.snp.updateConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)
@@ -127,7 +127,7 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
                 }
             }
             
-            deleteAction.image = UIImage(named: "delete")
+            deleteAction.image = UIImage(systemName: "trash.fill")
             
             let viewDetailsAction = SwipeAction(style: .default, title: "View") {
                 action, indexPath in
@@ -135,8 +135,10 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
                 self.viewDetails(index: indexPath.row)
             }
             
-            viewDetailsAction.image = UIImage(named: "details")
-            
+            viewDetailsAction.image = UIImage(systemName: "viewfinder.circle.fill")
+            viewDetailsAction.textColor = .white
+            viewDetailsAction.backgroundColor = UIColor.orange
+
             actions = [deleteAction, viewDetailsAction]
         } else {
             if let url = URL(string: news[indexPath.row].url) {
@@ -146,8 +148,10 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
                     UIApplication.shared.open(url)
                 }
                 
-                browseAction.image = UIImage(named: "safari")
-                
+                browseAction.image = UIImage(systemName: "safari.fill")
+                browseAction.textColor = .white
+                browseAction.backgroundColor = .systemBlue
+
                 actions.append(browseAction)
             }
         }
