@@ -16,7 +16,6 @@ class ResultsController: UIViewController {
     var news: [New] = []
     var termToSearch: String = ""
     
-    let backButton = UIButton(frame: .zero)
     let newsRelatedToLabel = UILabel(frame: .zero)
     let termToSearchLabel = UILabel(frame: .zero)
     let loadingLabel = UILabel(frame: .zero)
@@ -26,48 +25,40 @@ class ResultsController: UIViewController {
         view = UIView()
         view.backgroundColor = .white
         
-        view.addSubview(backButton)
+        view.addSubview(loadingLabel)
         view.addSubview(newsRelatedToLabel)
         view.addSubview(termToSearchLabel)
-        view.addSubview(loadingLabel)
         view.addSubview(tableView)
         
-        // Back button
-        backButton.setTitle("< Back", for: .normal)
-        backButton.setTitleColor(.systemBlue, for: .normal)
-        backButton.snp.updateConstraints {
+        // Loading label
+        loadingLabel.text = "LOADING ..."
+        loadingLabel.font = UIFont(name: "Georgia", size: 30)
+        loadingLabel.textColor = .black
+        loadingLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)
-            make.top.equalTo(view).offset(Constants.elementsTopMargin + 50)
+            make.top.equalTo(Constants.fixedTopMargin)
         }
-        backButton.addTarget(self, action: #selector(backButtonWasPressed), for: .touchUpInside)
-        
         // News related to label
         newsRelatedToLabel.text = "News related to:"
         newsRelatedToLabel.textColor = .black
+        termToSearchLabel.font = UIFont.systemFont(ofSize: 20)
+        newsRelatedToLabel.isHidden = true
         newsRelatedToLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)
-            make.top.equalTo(backButton.snp.bottom).offset(Constants.elementsTopMargin)
+            make.top.equalTo(Constants.fixedTopMargin)
         }
         
         // Term to search label
         termToSearchLabel.text = termToSearch
         termToSearchLabel.textColor = .black
-        termToSearchLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        termToSearchLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        termToSearchLabel.isHidden = true
         termToSearchLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(newsRelatedToLabel.snp.right).offset(10)
             make.top.equalTo(newsRelatedToLabel.snp.top)
-        }
-        
-        // Loading label
-        loadingLabel.text = "Loading ..."
-        loadingLabel.textColor = .black
-        loadingLabel.snp.updateConstraints {
-            (make) in
-            make.left.equalTo(view).offset(Constants.elementsLeft)
-            make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(Constants.elementsTopMargin)
         }
         
         // Table view
@@ -75,7 +66,9 @@ class ResultsController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.isHidden = true
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = .blue
+        tableView.separatorInset = .zero
         tableView.register(NewsViewCell.self, forCellReuseIdentifier: "newsViewCell")
         tableView.snp.updateConstraints {
             (make) in
@@ -87,10 +80,6 @@ class ResultsController: UIViewController {
         
         // Get and display results
         getNews()
-    }
-
-    @objc func backButtonWasPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -188,12 +177,14 @@ extension ResultsController {
                 if self.news.count > 0 {
                     DispatchQueue.main.async {
                         self.loadingLabel.isHidden = true
+                        self.newsRelatedToLabel.isHidden = false
+                        self.termToSearchLabel.isHidden = false
                         self.tableView.isHidden = false
                         
                         self.tableView.reloadData()
                     }
                 } else {
-                    self.loadingLabel.text = "No results"
+                    self.loadingLabel.text = "NO RESULTS"
                 }
             }
         }
@@ -202,8 +193,8 @@ extension ResultsController {
     func viewDetails(index: Int) {
         let detailsController = DetailsController()
         let new = news[index]
-            
         detailsController.newToShow = new
-        self.present(detailsController, animated: true, completion: nil)
+        
+        self.navigationController?.pushViewController(detailsController, animated: true)
     }
 }

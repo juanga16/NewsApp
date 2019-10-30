@@ -29,9 +29,9 @@ class SearchController: UIViewController {
         centeredView.addArrangedSubview(searchButton)
         
         // News finder label
-        newsFinderLabel.text = "NEWS OF THE WORLD"
+        newsFinderLabel.text = "LATESTS NEWS"
         newsFinderLabel.textColor = .black
-        newsFinderLabel.font = UIFont.systemFont(ofSize: 38)
+        newsFinderLabel.font = UIFont(name: "Georgia", size: 38)
         newsFinderLabel.snp.updateConstraints {
             (make) in
             make.centerX.equalTo(view)
@@ -102,7 +102,7 @@ class SearchController: UIViewController {
         
         let resultsController = ResultsController()
         resultsController.termToSearch = termTextField.text!
-            
-        present(resultsController, animated: true, completion: nil)
+          
+        self.navigationController?.pushViewController(resultsController, animated: true)
     }
 }

@@ -12,7 +12,6 @@ import SnapKit
 class DetailsController: UIViewController {
     var newToShow: New?
     
-    let backButton = UIButton(frame: .zero)
     let titleLabel = UILabel(frame: .zero)
     let descriptionLabel = UILabel(frame: .zero)
     let authorLabel = UILabel(frame: .zero)
@@ -25,23 +24,12 @@ class DetailsController: UIViewController {
             view = UIView()
             view.backgroundColor = .white
             
-            view.addSubview(backButton)
             view.addSubview(titleLabel)
             view.addSubview(descriptionLabel)
             view.addSubview(authorLabel)
             view.addSubview(publishedAtLabel)
             view.addSubview(imageView)
             view.addSubview(contentLabel)
-            
-            // Back button
-            backButton.setTitle("< Back", for: .normal)
-            backButton.setTitleColor(.systemBlue, for: .normal)
-            backButton.snp.updateConstraints {
-                (make) in
-                make.left.equalTo(view).offset(Constants.elementsLeft)
-                make.top.equalTo(view).offset(Constants.elementsTopMargin + 50)
-            }
-            backButton.addTarget(self, action: #selector(backButtonWasPressed), for: .touchUpInside)
             
             // Title label
             titleLabel.text = new.title
@@ -53,7 +41,7 @@ class DetailsController: UIViewController {
                 (make) in
                 make.left.equalTo(view).offset(Constants.elementsLeft)
                 make.right.equalTo(view).offset(-Constants.elementsLeft)
-                make.top.equalTo(backButton.snp.bottom).offset(Constants.elementsTopMargin)
+                make.top.equalTo(Constants.fixedTopMargin)
             }
             
             // Description label
@@ -98,7 +86,7 @@ class DetailsController: UIViewController {
                 make.left.equalTo(view).offset(Constants.elementsLeft)
                 make.right.equalTo(view).offset(-Constants.elementsLeft)
                 make.width.equalTo(view).offset(-Constants.elementsLeft*2)
-                make.height.equalTo(100)
+                make.height.equalTo(0)
                 make.top.equalTo(publishedAtLabel.snp.bottom).offset(Constants.elementsTopMargin)
             }
             
@@ -117,10 +105,6 @@ class DetailsController: UIViewController {
                 make.top.equalTo(imageView.snp.bottom).offset(Constants.elementsTopMargin)
             }
         }
-    }
-    
-    @objc func backButtonWasPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
 }
 
