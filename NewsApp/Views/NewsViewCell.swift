@@ -41,7 +41,7 @@ class NewsViewCell: SwipeTableViewCell {
         }
         
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = .black
+        titleLabel.textColor = .label
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textAlignment = .left
         titleLabel.snp.updateConstraints {
@@ -52,7 +52,7 @@ class NewsViewCell: SwipeTableViewCell {
         }
         
         publishedAtLabel.textAlignment = .right
-        publishedAtLabel.textColor = .black
+        publishedAtLabel.textColor = .label
         publishedAtLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(container)

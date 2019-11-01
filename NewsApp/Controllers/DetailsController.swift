@@ -22,7 +22,7 @@ class DetailsController: UIViewController {
     override func viewDidLoad() {
         if let new = newToShow {
             view = UIView()
-            view.backgroundColor = .white
+            view.backgroundColor = .systemBackground
             
             view.addSubview(titleLabel)
             view.addSubview(descriptionLabel)
@@ -33,7 +33,7 @@ class DetailsController: UIViewController {
             
             // Title label
             titleLabel.text = new.title
-            titleLabel.textColor = .black
+            titleLabel.textColor = .label
             titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
             titleLabel.numberOfLines = 0
             titleLabel.textAlignment = .justified
@@ -48,7 +48,7 @@ class DetailsController: UIViewController {
             descriptionLabel.text = new.description
             descriptionLabel.textAlignment = .justified
             descriptionLabel.font = UIFont.italicSystemFont(ofSize: 17)
-            descriptionLabel.textColor = .black
+            descriptionLabel.textColor = .label
             descriptionLabel.numberOfLines = 0
             descriptionLabel.snp.updateConstraints {
                 (make) in

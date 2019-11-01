@@ -17,7 +17,7 @@ class SearchController: UIViewController {
     
     override func viewDidLoad() {
         view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         let centeredView = UIStackView(frame: .zero)
         
@@ -30,7 +30,7 @@ class SearchController: UIViewController {
         
         // News finder label
         newsFinderLabel.text = "LATESTS NEWS"
-        newsFinderLabel.textColor = .black
+        newsFinderLabel.textColor = .label
         newsFinderLabel.font = UIFont(name: "Georgia", size: 38)
         newsFinderLabel.snp.updateConstraints {
             (make) in
@@ -40,7 +40,7 @@ class SearchController: UIViewController {
         
         // Enter term label
         enterTermLabel.text = "Enter any word to find related news"
-        enterTermLabel.textColor = .black
+        enterTermLabel.textColor = .label
         enterTermLabel.snp.updateConstraints {
             (make) in
             make.centerX.equalTo(view)
@@ -81,7 +81,7 @@ class SearchController: UIViewController {
         
         // Search button
         searchButton.setTitle("Search", for: .normal)
-        searchButton.setTitleColor(.systemBlue, for: .normal)
+        searchButton.setTitleColor(UIColor(named: "buttonColor"), for: .normal)
         searchButton.addTarget(self, action: #selector(searchButtonWasPressed), for: .touchUpInside)
     }
     

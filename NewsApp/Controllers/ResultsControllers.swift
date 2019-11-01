@@ -23,7 +23,7 @@ class ResultsController: UIViewController {
     
     override func viewDidLoad() {
         view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         view.addSubview(loadingLabel)
         view.addSubview(newsRelatedToLabel)
@@ -33,15 +33,16 @@ class ResultsController: UIViewController {
         // Loading label
         loadingLabel.text = "LOADING ..."
         loadingLabel.font = UIFont(name: "Georgia", size: 30)
-        loadingLabel.textColor = .black
+        loadingLabel.textColor = .label
         loadingLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)
             make.top.equalTo(Constants.fixedTopMargin)
         }
+        
         // News related to label
         newsRelatedToLabel.text = "News related to:"
-        newsRelatedToLabel.textColor = .black
+        newsRelatedToLabel.textColor = .label
         termToSearchLabel.font = UIFont.systemFont(ofSize: 20)
         newsRelatedToLabel.isHidden = true
         newsRelatedToLabel.snp.updateConstraints {
@@ -52,13 +53,13 @@ class ResultsController: UIViewController {
         
         // Term to search label
         termToSearchLabel.text = termToSearch
-        termToSearchLabel.textColor = .black
+        termToSearchLabel.textColor = .label
         termToSearchLabel.font = UIFont.boldSystemFont(ofSize: 22)
         termToSearchLabel.isHidden = true
         termToSearchLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(newsRelatedToLabel.snp.right).offset(10)
-            make.top.equalTo(newsRelatedToLabel.snp.top)
+            make.bottom.equalTo(newsRelatedToLabel.snp.bottom).offset(2)
         }
         
         // Table view
@@ -67,7 +68,7 @@ class ResultsController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.isHidden = true
         tableView.separatorStyle = .singleLine
-        tableView.separatorColor = .blue
+        tableView.separatorColor = .secondaryLabel
         tableView.separatorInset = .zero
         tableView.register(NewsViewCell.self, forCellReuseIdentifier: "newsViewCell")
         tableView.snp.updateConstraints {
@@ -104,6 +105,7 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         var actions: [SwipeAction] = []
+
         
         if orientation == .right {
             let deleteAction = SwipeAction(style: .destructive, title: "Remove") {
@@ -116,7 +118,7 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
                 }
             }
             
-            deleteAction.image = UIImage(systemName: "trash.fill")
+            deleteAction.image = UIImage(systemName: "trash.fill")!.withTintColor(.white)
             
             let viewDetailsAction = SwipeAction(style: .default, title: "View") {
                 action, indexPath in
@@ -124,9 +126,9 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
                 self.viewDetails(index: indexPath.row)
             }
             
-            viewDetailsAction.image = UIImage(systemName: "viewfinder.circle.fill")
+            viewDetailsAction.image = UIImage(systemName: "viewfinder.circle.fill")!.withTintColor(.white)
             viewDetailsAction.textColor = .white
-            viewDetailsAction.backgroundColor = UIColor.orange
+            viewDetailsAction.backgroundColor = .orange
 
             actions = [deleteAction, viewDetailsAction]
         } else {
@@ -137,7 +139,7 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
                     UIApplication.shared.open(url)
                 }
                 
-                browseAction.image = UIImage(systemName: "safari.fill")
+                browseAction.image = UIImage(systemName: "safari.fill")?.withTintColor(.white)
                 browseAction.textColor = .white
                 browseAction.backgroundColor = .systemBlue
 
