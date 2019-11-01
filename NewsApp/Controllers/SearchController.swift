@@ -91,6 +91,7 @@ class SearchController: UIViewController {
             let acceptAction = UIAlertAction(title: "Accept", style: .cancel, handler: nil)
             alert.addAction(acceptAction)
             
+            alert.view.layoutIfNeeded()
             present(alert, animated: true, completion: nil)
             
             return

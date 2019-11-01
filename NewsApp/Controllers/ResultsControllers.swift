@@ -18,27 +18,17 @@ class ResultsController: UIViewController {
     
     let newsRelatedToLabel = UILabel(frame: .zero)
     let termToSearchLabel = UILabel(frame: .zero)
-    let loadingLabel = UILabel(frame: .zero)
     let tableView = UITableView(frame: .zero)
+    let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         view = UIView()
         view.backgroundColor = .systemBackground
         
-        view.addSubview(loadingLabel)
+        view.addSubview(activityIndicator)
         view.addSubview(newsRelatedToLabel)
         view.addSubview(termToSearchLabel)
         view.addSubview(tableView)
-        
-        // Loading label
-        loadingLabel.text = "LOADING ..."
-        loadingLabel.font = UIFont(name: "Georgia", size: 30)
-        loadingLabel.textColor = .label
-        loadingLabel.snp.updateConstraints {
-            (make) in
-            make.left.equalTo(view).offset(Constants.elementsLeft)
-            make.top.equalTo(Constants.fixedTopMargin)
-        }
         
         // News related to label
         newsRelatedToLabel.text = "News related to:"
@@ -78,6 +68,18 @@ class ResultsController: UIViewController {
             make.right.equalTo(view).offset(-Constants.elementsLeft)
             make.bottom.equalTo(view.snp.bottom).offset(-Constants.elementsTopMargin)
         }
+        
+        // Activity indicator
+        activityIndicator.snp.updateConstraints {
+            make in
+            
+            make.centerX.centerY.equalTo(view)
+            make.height.width.equalTo(50)
+        }
+        
+        activityIndicator.color = .label
+        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        activityIndicator.startAnimating()
         
         // Get and display results
         getNews()
@@ -178,15 +180,13 @@ extension ResultsController {
                 
                 if self.news.count > 0 {
                     DispatchQueue.main.async {
-                        self.loadingLabel.isHidden = true
+                        self.activityIndicator.stopAnimating()
                         self.newsRelatedToLabel.isHidden = false
                         self.termToSearchLabel.isHidden = false
                         self.tableView.isHidden = false
                         
                         self.tableView.reloadData()
                     }
-                } else {
-                    self.loadingLabel.text = "NO RESULTS"
                 }
             }
         }
