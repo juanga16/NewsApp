@@ -10,6 +10,6 @@ import Foundation
 
 class Constants {
     static let elementsLeft = 30
-    static let elementsTopMargin = 10
+    static let elementsTopMargin = 20
     static let fixedTopMargin = 100
 }

@@ -14,12 +14,11 @@ class SearchController: UIViewController {
     let enterTermLabel =  UILabel(frame: .zero)
     let termTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 15, height: 30))
     let searchButton = UIButton(frame: .zero)
+    let centeredView = UIStackView(frame: .zero)
     
     override func viewDidLoad() {
         view = UIView()
         view.backgroundColor = .systemBackground
-        
-        let centeredView = UIStackView(frame: .zero)
         
         view.addSubview(newsFinderLabel)
         view.addSubview(enterTermLabel)

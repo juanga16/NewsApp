@@ -20,25 +20,40 @@ class ResultsController: UIViewController {
     let termToSearchLabel = UILabel(frame: .zero)
     let tableView = UITableView(frame: .zero)
     let activityIndicator = UIActivityIndicatorView(style: .large)
+    let centeredView = UIStackView(frame: .zero)
     
     override func viewDidLoad() {
         view = UIView()
         view.backgroundColor = .systemBackground
         
         view.addSubview(activityIndicator)
-        view.addSubview(newsRelatedToLabel)
-        view.addSubview(termToSearchLabel)
+        view.addSubview(centeredView)
         view.addSubview(tableView)
         
+        centeredView.addSubview(newsRelatedToLabel)
+        centeredView.addSubview(termToSearchLabel)
+       
+        // Centered view
+        centeredView.distribution = .equalSpacing
+        centeredView.alignment = .leading
+        centeredView.axis = .horizontal
+        centeredView.isHidden = true
+        centeredView.snp.updateConstraints {
+            make in
+            
+            make.left.equalTo(view).offset(Constants.elementsLeft)
+            make.top.equalTo(Constants.fixedTopMargin)
+        }
+
         // News related to label
         newsRelatedToLabel.text = "News related to:"
         newsRelatedToLabel.textColor = .label
         termToSearchLabel.font = UIFont.systemFont(ofSize: 20)
         newsRelatedToLabel.isHidden = true
         newsRelatedToLabel.snp.updateConstraints {
-            (make) in
-            make.left.equalTo(view).offset(Constants.elementsLeft)
-            make.top.equalTo(Constants.fixedTopMargin)
+            make in
+            
+            make.centerY.left.equalToSuperview()
         }
         
         // Term to search label
@@ -47,9 +62,10 @@ class ResultsController: UIViewController {
         termToSearchLabel.font = UIFont.boldSystemFont(ofSize: 22)
         termToSearchLabel.isHidden = true
         termToSearchLabel.snp.updateConstraints {
-            (make) in
+            make in
+            
             make.left.equalTo(newsRelatedToLabel.snp.right).offset(10)
-            make.bottom.equalTo(newsRelatedToLabel.snp.bottom).offset(2)
+            make.centerY.equalToSuperview()
         }
         
         // Table view
@@ -181,8 +197,7 @@ extension ResultsController {
                 if self.news.count > 0 {
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
-                        self.newsRelatedToLabel.isHidden = false
-                        self.termToSearchLabel.isHidden = false
+                        self.centeredView.isHidden = false
                         self.tableView.isHidden = false
                         
                         self.tableView.reloadData()

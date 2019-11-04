@@ -10,8 +10,10 @@ import UIKit
 import SnapKit
 
 class DetailsController: UIViewController {
-    var newToShow: New?
+    var newToShow: New!
     
+    let scrollView = UIScrollView()
+    let containerView = UIView()
     let titleLabel = UILabel(frame: .zero)
     let descriptionLabel = UILabel(frame: .zero)
     let authorLabel = UILabel(frame: .zero)
@@ -20,90 +22,51 @@ class DetailsController: UIViewController {
     let contentLabel = UILabel(frame: .zero)
     
     override func viewDidLoad() {
-        if let new = newToShow {
-            view = UIView()
-            view.backgroundColor = .systemBackground
+        view = UIView(frame: .zero)
+        view.backgroundColor = .systemBackground
+        
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(containerView)
+        
+        containerView.addSubview(imageView)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(descriptionLabel)
+        containerView.addSubview(authorLabel)
+        containerView.addSubview(publishedAtLabel)
+        containerView.addSubview(contentLabel)
+        
+        // Scroll view
+        scrollView.snp.updateConstraints {
+            make in
             
-            view.addSubview(titleLabel)
-            view.addSubview(descriptionLabel)
-            view.addSubview(authorLabel)
-            view.addSubview(publishedAtLabel)
-            view.addSubview(imageView)
-            view.addSubview(contentLabel)
+            make.edges.equalTo(view)
+        }
+        
+        // Container view
+        containerView.snp.updateConstraints {
+            make in
             
-            // Title label
-            titleLabel.text = new.title
-            titleLabel.textColor = .label
-            titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-            titleLabel.numberOfLines = 0
-            titleLabel.textAlignment = .justified
-            titleLabel.snp.updateConstraints {
-                (make) in
-                make.left.equalTo(view).offset(Constants.elementsLeft)
-                make.right.equalTo(view).offset(-Constants.elementsLeft)
-                make.top.equalTo(Constants.fixedTopMargin)
-            }
+            make.top.bottom.equalTo(scrollView)
+            make.left.right.equalTo(view)
+            make.width.height.equalTo(scrollView)
+        }
+        
+        // Image view
+        imageView.isHidden = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.snp.updateConstraints {
+            make in
             
-            // Description label
-            descriptionLabel.text = new.description
-            descriptionLabel.textAlignment = .justified
-            descriptionLabel.font = UIFont.italicSystemFont(ofSize: 17)
-            descriptionLabel.textColor = .label
-            descriptionLabel.numberOfLines = 0
-            descriptionLabel.snp.updateConstraints {
-                (make) in
-                make.left.equalTo(view).offset(Constants.elementsLeft)
-                make.right.equalTo(view).offset(-Constants.elementsLeft)
-                make.top.equalTo(titleLabel.snp.bottom).offset(Constants.elementsTopMargin)
-            }
-            
-            // Author label
-            authorLabel.text = new.author
-            authorLabel.lineBreakMode = .byTruncatingTail
-            authorLabel.snp.updateConstraints {
-                (make) in
-                make.left.equalTo(view).offset(Constants.elementsLeft)
-                make.top.equalTo(descriptionLabel.snp.bottom).offset(Constants.elementsTopMargin)
-                make.width.lessThanOrEqualTo(250)
-            }
-            
-            // Published at label
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM-dd HH:mm"
-            publishedAtLabel.text = dateFormatter.string(from: new.publishedAt)
-            publishedAtLabel.textAlignment = .right
-            publishedAtLabel.snp.updateConstraints {
-                (make) in
-                make.right.equalTo(view).offset(-Constants.elementsLeft)
-                make.top.equalTo(authorLabel.snp.top)
-            }
-            
-            // Image view
-            imageView.isHidden = true
-            imageView.contentMode = .scaleAspectFit
-            imageView.snp.updateConstraints {
-                (make) in
-                make.left.equalTo(view).offset(Constants.elementsLeft)
-                make.right.equalTo(view).offset(-Constants.elementsLeft)
-                make.width.equalTo(view).offset(-Constants.elementsLeft*2)
-                make.height.equalTo(0)
-                make.top.equalTo(publishedAtLabel.snp.bottom).offset(Constants.elementsTopMargin)
-            }
-            
-            if new.urlToImage != "" {
-                loadImage(urlToImage: new.urlToImage)
-            }
-            
-            // Content label
-            contentLabel.text = new.content
-            contentLabel.numberOfLines = 0
-            contentLabel.textAlignment = .justified
-            contentLabel.snp.updateConstraints {
-                (make) in
-                make.left.equalTo(view).offset(Constants.elementsLeft)
-                make.right.equalTo(view).offset(-Constants.elementsLeft)
-                make.top.equalTo(imageView.snp.bottom).offset(Constants.elementsTopMargin)
-            }
+            make.left.right.equalTo(view)
+            make.top.equalTo(10)
+            make.height.equalTo(0)
+        }
+        
+        if newToShow.urlToImage != "" {
+            loadImage(urlToImage: newToShow.urlToImage)
+        } else {
+            updateRestOfElements()
         }
     }
 }
@@ -153,7 +116,69 @@ extension DetailsController {
                 (make) in
                 make.height.equalTo(imageHeight)
             }
-            self.imageView.backgroundColor = .yellow
+            
+            self.updateRestOfElements()
+        }
+    }
+    
+    func updateRestOfElements() {
+        // Title label
+        titleLabel.text = newToShow.title
+        titleLabel.textColor = .label
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .justified
+        titleLabel.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(view).offset(Constants.elementsLeft)
+            make.right.equalTo(view).offset(-Constants.elementsLeft)
+            make.top.equalTo(imageView.snp.bottom).offset(Constants.elementsTopMargin)
+        }
+        
+        // Description label
+        descriptionLabel.text = newToShow.description
+        descriptionLabel.textAlignment = .justified
+        descriptionLabel.font = UIFont.italicSystemFont(ofSize: 17)
+        descriptionLabel.textColor = .label
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(view).offset(Constants.elementsLeft)
+            make.right.equalTo(view).offset(-Constants.elementsLeft)
+            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.elementsTopMargin)
+        }
+        
+        // Author label
+        authorLabel.text = newToShow.author
+        authorLabel.lineBreakMode = .byTruncatingTail
+        authorLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        authorLabel.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(view).offset(Constants.elementsLeft)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(Constants.elementsTopMargin)
+            make.width.lessThanOrEqualTo(250)
+        }
+        
+        // Published at label
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM-dd HH:mm"
+        publishedAtLabel.text = dateFormatter.string(from: newToShow.publishedAt)
+        publishedAtLabel.textAlignment = .right
+        publishedAtLabel.snp.updateConstraints {
+            (make) in
+            make.right.equalTo(view).offset(-Constants.elementsLeft)
+            make.top.equalTo(authorLabel.snp.top)
+        }
+        
+        // Content label
+        contentLabel.text = newToShow.content
+        contentLabel.numberOfLines = 0
+        contentLabel.textAlignment = .justified
+        contentLabel.snp.updateConstraints {
+            (make) in
+            make.left.equalTo(view).offset(Constants.elementsLeft)
+            make.right.equalTo(view).offset(-Constants.elementsLeft)
+            make.top.equalTo(publishedAtLabel.snp.bottom).offset(Constants.elementsTopMargin)
         }
     }
 }

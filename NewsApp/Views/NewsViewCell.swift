@@ -40,7 +40,7 @@ class NewsViewCell: SwipeTableViewCell {
             make.bottom.equalTo(contentView)
         }
         
-        titleLabel.numberOfLines = 0
+        titleLabel.numberOfLines = 5
         titleLabel.textColor = .label
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textAlignment = .left
