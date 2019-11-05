@@ -32,7 +32,7 @@ class NewsViewCell: SwipeTableViewCell {
         
         contentView.addSubview(container)
         
-        container.snp.updateConstraints {
+        container.snp.makeConstraints {
             (make) in
             make.left.equalTo(contentView)
             make.right.equalTo(contentView).offset(-20)
@@ -44,7 +44,7 @@ class NewsViewCell: SwipeTableViewCell {
         titleLabel.textColor = .label
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textAlignment = .left
-        titleLabel.snp.updateConstraints {
+        titleLabel.snp.makeConstraints {
             (make) in
             make.left.equalTo(container)
             make.right.equalTo(container)
@@ -53,7 +53,7 @@ class NewsViewCell: SwipeTableViewCell {
         
         publishedAtLabel.textAlignment = .right
         publishedAtLabel.textColor = .label
-        publishedAtLabel.snp.updateConstraints {
+        publishedAtLabel.snp.makeConstraints {
             (make) in
             make.left.equalTo(container)
             make.right.equalTo(container)

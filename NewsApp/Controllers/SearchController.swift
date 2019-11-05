@@ -31,7 +31,7 @@ class SearchController: UIViewController {
         newsFinderLabel.text = "LATESTS NEWS"
         newsFinderLabel.textColor = .label
         newsFinderLabel.font = UIFont(name: "Georgia", size: 38)
-        newsFinderLabel.snp.updateConstraints {
+        newsFinderLabel.snp.makeConstraints {
             (make) in
             make.centerX.equalTo(view)
             make.top.equalTo(view).offset(300)
@@ -40,7 +40,7 @@ class SearchController: UIViewController {
         // Enter term label
         enterTermLabel.text = "Enter any word to find related news"
         enterTermLabel.textColor = .label
-        enterTermLabel.snp.updateConstraints {
+        enterTermLabel.snp.makeConstraints {
             (make) in
             make.centerX.equalTo(view)
             make.top.equalTo(newsFinderLabel.snp.bottom).offset(50)
@@ -50,7 +50,7 @@ class SearchController: UIViewController {
         centeredView.distribution = .equalCentering
         centeredView.alignment = .center
         centeredView.axis = .horizontal
-        centeredView.snp.updateConstraints {
+        centeredView.snp.makeConstraints {
             make in
             
             make.left.equalTo(view).offset(Constants.elementsLeft*2)
@@ -64,7 +64,7 @@ class SearchController: UIViewController {
         termTextField.layer.cornerRadius = 4
         termTextField.setLeftPaddingPoints(10)
         termTextField.setRightPaddingPoints(10)
-        termTextField.snp.updateConstraints {
+        termTextField.snp.makeConstraints {
             (make) in
             
             make.width.equalTo(200)

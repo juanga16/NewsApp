@@ -14,12 +14,52 @@ class DetailsController: UIViewController {
     
     let scrollView = UIScrollView()
     let containerView = UIView()
-    let titleLabel = UILabel(frame: .zero)
-    let descriptionLabel = UILabel(frame: .zero)
-    let authorLabel = UILabel(frame: .zero)
-    let publishedAtLabel = UILabel(frame: .zero)
-    let imageView = UIImageView(frame: .zero)
-    let contentLabel = UILabel(frame: .zero)
+    
+    let titleLabel : UILabel = {
+        let tempTitleLabel = UILabel(frame: .zero)
+        tempTitleLabel.textColor = .label
+        tempTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        tempTitleLabel.numberOfLines = 0
+        tempTitleLabel.textAlignment = .justified
+        return tempTitleLabel
+        }()
+    
+    let descriptionLabel : UILabel = {
+        let tempDescriptionLabel = UILabel(frame: .zero)
+        tempDescriptionLabel.textAlignment = .justified
+        tempDescriptionLabel.font = UIFont.italicSystemFont(ofSize: 17)
+        tempDescriptionLabel.textColor = .label
+        tempDescriptionLabel.numberOfLines = 0
+        return tempDescriptionLabel
+    }()
+    
+    let authorLabel : UILabel = {
+        let tempAuthorLabel = UILabel(frame: .zero)
+        tempAuthorLabel.lineBreakMode = .byTruncatingTail
+        tempAuthorLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        return tempAuthorLabel
+    }()
+    
+    
+    let publishedAtLabel : UILabel = {
+        let tempPublishedAtLabel = UILabel(frame: .zero)
+        tempPublishedAtLabel.textAlignment = .right
+        return tempPublishedAtLabel
+    }()
+    
+    let imageView : UIImageView = {
+        let tempImageView = UIImageView(frame: .zero)
+        tempImageView.isHidden = true
+        tempImageView.contentMode = .scaleAspectFit
+        return tempImageView
+    }()
+    
+    let contentLabel : UILabel = {
+        let tempContentLabel = UILabel(frame: .zero)
+        tempContentLabel.numberOfLines = 0
+        tempContentLabel.textAlignment = .justified
+        return tempContentLabel
+    }()
     
     override func viewDidLoad() {
         view = UIView(frame: .zero)
@@ -39,25 +79,20 @@ class DetailsController: UIViewController {
         // Scroll view
         scrollView.snp.updateConstraints {
             make in
-            
             make.edges.equalTo(view)
         }
         
         // Container view
         containerView.snp.updateConstraints {
             make in
-            
             make.top.bottom.equalTo(scrollView)
             make.left.right.equalTo(view)
             make.width.height.equalTo(scrollView)
         }
         
         // Image view
-        imageView.isHidden = true
-        imageView.contentMode = .scaleAspectFit
         imageView.snp.updateConstraints {
             make in
-            
             make.left.right.equalTo(view)
             make.top.equalTo(10)
             make.height.equalTo(0)
@@ -124,10 +159,6 @@ extension DetailsController {
     func updateRestOfElements() {
         // Title label
         titleLabel.text = newToShow.title
-        titleLabel.textColor = .label
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .justified
         titleLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)
@@ -137,10 +168,6 @@ extension DetailsController {
         
         // Description label
         descriptionLabel.text = newToShow.description
-        descriptionLabel.textAlignment = .justified
-        descriptionLabel.font = UIFont.italicSystemFont(ofSize: 17)
-        descriptionLabel.textColor = .label
-        descriptionLabel.numberOfLines = 0
         descriptionLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)
@@ -150,8 +177,6 @@ extension DetailsController {
         
         // Author label
         authorLabel.text = newToShow.author
-        authorLabel.lineBreakMode = .byTruncatingTail
-        authorLabel.font = UIFont.boldSystemFont(ofSize: 16)
         authorLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)
@@ -163,7 +188,6 @@ extension DetailsController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM-dd HH:mm"
         publishedAtLabel.text = dateFormatter.string(from: newToShow.publishedAt)
-        publishedAtLabel.textAlignment = .right
         publishedAtLabel.snp.updateConstraints {
             (make) in
             make.right.equalTo(view).offset(-Constants.elementsLeft)
@@ -172,8 +196,6 @@ extension DetailsController {
         
         // Content label
         contentLabel.text = newToShow.content
-        contentLabel.numberOfLines = 0
-        contentLabel.textAlignment = .justified
         contentLabel.snp.updateConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)

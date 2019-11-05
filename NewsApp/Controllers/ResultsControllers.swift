@@ -38,7 +38,7 @@ class ResultsController: UIViewController {
         centeredView.alignment = .leading
         centeredView.axis = .horizontal
         centeredView.isHidden = true
-        centeredView.snp.updateConstraints {
+        centeredView.snp.makeConstraints {
             make in
             
             make.left.equalTo(view).offset(Constants.elementsLeft)
@@ -50,7 +50,7 @@ class ResultsController: UIViewController {
         newsRelatedToLabel.textColor = .label
         termToSearchLabel.font = UIFont.systemFont(ofSize: 20)
         newsRelatedToLabel.isHidden = true
-        newsRelatedToLabel.snp.updateConstraints {
+        newsRelatedToLabel.snp.makeConstraints {
             make in
             
             make.centerY.left.equalToSuperview()
@@ -61,7 +61,7 @@ class ResultsController: UIViewController {
         termToSearchLabel.textColor = .label
         termToSearchLabel.font = UIFont.boldSystemFont(ofSize: 22)
         termToSearchLabel.isHidden = true
-        termToSearchLabel.snp.updateConstraints {
+        termToSearchLabel.snp.makeConstraints {
             make in
             
             make.left.equalTo(newsRelatedToLabel.snp.right).offset(10)
@@ -77,7 +77,7 @@ class ResultsController: UIViewController {
         tableView.separatorColor = .secondaryLabel
         tableView.separatorInset = .zero
         tableView.register(NewsViewCell.self, forCellReuseIdentifier: "newsViewCell")
-        tableView.snp.updateConstraints {
+        tableView.snp.makeConstraints {
             (make) in
             make.left.equalTo(view).offset(Constants.elementsLeft)
             make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(Constants.elementsTopMargin)
@@ -86,7 +86,7 @@ class ResultsController: UIViewController {
         }
         
         // Activity indicator
-        activityIndicator.snp.updateConstraints {
+        activityIndicator.snp.makeConstraints {
             make in
             
             make.centerX.centerY.equalTo(view)
