@@ -13,8 +13,21 @@ import SnapKit
 class NewsViewCell: SwipeTableViewCell {
 
     let container = UIView()
-    let titleLabel = UILabel(frame: .zero)
-    let publishedAtLabel = UILabel(frame: .zero)
+    let titleLabel : UILabel = {
+        let tempTitleLabel = UILabel(frame: .zero)
+        tempTitleLabel.numberOfLines = 5
+        tempTitleLabel.textColor = .label
+        tempTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        tempTitleLabel.textAlignment = .left
+        return tempTitleLabel
+    }()
+    
+    let publishedAtLabel : UILabel = {
+        let tempPublishedAtLabel = UILabel(frame: .zero)
+        tempPublishedAtLabel.textAlignment = .right
+        tempPublishedAtLabel.textColor = .label
+        return tempPublishedAtLabel
+    }()
     
     func configure(new: New) {
         titleLabel.text = new.title
@@ -33,31 +46,22 @@ class NewsViewCell: SwipeTableViewCell {
         contentView.addSubview(container)
         
         container.snp.makeConstraints {
-            (make) in
+            make in
             make.left.equalTo(contentView)
             make.right.equalTo(contentView).offset(-20)
-            make.top.equalTo(contentView)
-            make.bottom.equalTo(contentView)
+            make.top.bottom.equalTo(contentView)
         }
         
-        titleLabel.numberOfLines = 5
-        titleLabel.textColor = .label
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.textAlignment = .left
         titleLabel.snp.makeConstraints {
-            (make) in
-            make.left.equalTo(container)
-            make.right.equalTo(container)
+            make in
+            make.left.right.equalTo(container)
             make.top.equalTo(container).offset(Constants.elementsTopMargin)
         }
         
-        publishedAtLabel.textAlignment = .right
-        publishedAtLabel.textColor = .label
         publishedAtLabel.snp.makeConstraints {
-            (make) in
-            make.left.equalTo(container)
-            make.right.equalTo(container)
-            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.elementsTopMargin)
+            make in
+            make.left.right.equalTo(container)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.bottom.equalTo(-10)
         }
     }

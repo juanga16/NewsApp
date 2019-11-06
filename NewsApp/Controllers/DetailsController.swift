@@ -22,7 +22,7 @@ class DetailsController: UIViewController {
         tempTitleLabel.numberOfLines = 0
         tempTitleLabel.textAlignment = .justified
         return tempTitleLabel
-        }()
+    }()
     
     let descriptionLabel : UILabel = {
         let tempDescriptionLabel = UILabel(frame: .zero)
@@ -39,7 +39,6 @@ class DetailsController: UIViewController {
         tempAuthorLabel.font = UIFont.boldSystemFont(ofSize: 16)
         return tempAuthorLabel
     }()
-    
     
     let publishedAtLabel : UILabel = {
         let tempPublishedAtLabel = UILabel(frame: .zero)
@@ -160,7 +159,7 @@ extension DetailsController {
         // Title label
         titleLabel.text = newToShow.title
         titleLabel.snp.updateConstraints {
-            (make) in
+            make in
             make.left.equalTo(view).offset(Constants.elementsLeft)
             make.right.equalTo(view).offset(-Constants.elementsLeft)
             make.top.equalTo(imageView.snp.bottom).offset(Constants.elementsTopMargin)
@@ -169,7 +168,7 @@ extension DetailsController {
         // Description label
         descriptionLabel.text = newToShow.description
         descriptionLabel.snp.updateConstraints {
-            (make) in
+            make in
             make.left.equalTo(view).offset(Constants.elementsLeft)
             make.right.equalTo(view).offset(-Constants.elementsLeft)
             make.top.equalTo(titleLabel.snp.bottom).offset(Constants.elementsTopMargin)
@@ -178,10 +177,10 @@ extension DetailsController {
         // Author label
         authorLabel.text = newToShow.author
         authorLabel.snp.updateConstraints {
-            (make) in
+            make in
             make.left.equalTo(view).offset(Constants.elementsLeft)
             make.top.equalTo(descriptionLabel.snp.bottom).offset(Constants.elementsTopMargin)
-            make.width.lessThanOrEqualTo(250)
+            make.width.lessThanOrEqualTo(220)
         }
         
         // Published at label
@@ -189,7 +188,7 @@ extension DetailsController {
         dateFormatter.dateFormat = "MMM-dd HH:mm"
         publishedAtLabel.text = dateFormatter.string(from: newToShow.publishedAt)
         publishedAtLabel.snp.updateConstraints {
-            (make) in
+            make in
             make.right.equalTo(view).offset(-Constants.elementsLeft)
             make.top.equalTo(authorLabel.snp.top)
         }
@@ -197,7 +196,7 @@ extension DetailsController {
         // Content label
         contentLabel.text = newToShow.content
         contentLabel.snp.updateConstraints {
-            (make) in
+            make in
             make.left.equalTo(view).offset(Constants.elementsLeft)
             make.right.equalTo(view).offset(-Constants.elementsLeft)
             make.top.equalTo(publishedAtLabel.snp.bottom).offset(Constants.elementsTopMargin)

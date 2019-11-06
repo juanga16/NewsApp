@@ -10,15 +10,76 @@ import UIKit
 import SnapKit
 
 class SearchController: UIViewController {
-    let newsFinderLabel = UILabel(frame: .zero)
-    let enterTermLabel =  UILabel(frame: .zero)
-    let termTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 15, height: 30))
-    let searchButton = UIButton(frame: .zero)
-    let centeredView = UIStackView(frame: .zero)
+    let newsFinderLabel : UILabel = {
+        let tempNewsFinderLabel = UILabel(frame: .zero)
+        tempNewsFinderLabel.text = "LATESTS NEWS"
+        tempNewsFinderLabel.textColor = .label
+        tempNewsFinderLabel.font = UIFont(name: "Georgia", size: 38)
+        return tempNewsFinderLabel
+    }()
+    
+    let enterTermLabel : UILabel = {
+        let tempEnterTermLabel = UILabel(frame: .zero)
+        tempEnterTermLabel.text = "Enter any word to find related news"
+        tempEnterTermLabel.textColor = .label
+        return tempEnterTermLabel
+    }()
+    
+    let termTextField : UITextField = {
+        let tempTermTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 15, height: 30))
+        tempTermTextField.text = ""
+        tempTermTextField.layer.borderWidth = 1
+        tempTermTextField.layer.cornerRadius = 4
+        tempTermTextField.setLeftPaddingPoints(10)
+        tempTermTextField.setRightPaddingPoints(10)
+        return tempTermTextField
+        
+    }()
+    
+    let searchButton : UIButton = {
+        let tempSearchButton = UIButton(frame: .zero)
+        tempSearchButton.setTitle("Search", for: .normal)
+        tempSearchButton.setTitleColor(UIColor(named: "buttonColor"), for: .normal)
+        tempSearchButton.addTarget(self, action: #selector(searchButtonWasPressed), for: .touchUpInside)
+        return tempSearchButton
+    }()
+    
+    let centeredView : UIStackView = {
+        let tempCenteredView = UIStackView(frame: .zero)
+        tempCenteredView.distribution = .equalCentering
+        tempCenteredView.alignment = .center
+        tempCenteredView.axis = .horizontal
+        return tempCenteredView
+    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        newsFinderLabel.snp.updateConstraints {
+            make in
+            make.top.equalTo(100)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 2.0, delay: 0.3, options: [], animations: {
+            [unowned self] in
+            self.newsFinderLabel.snp.updateConstraints {
+                make in
+                make.top.equalTo(300)
+            }
+            self.view.layoutIfNeeded()
+        })
+    }
     
     override func viewDidLoad() {
-        view = UIView()
-        view.backgroundColor = .systemBackground
+        view = {
+            let tempView = UIView()
+            tempView.backgroundColor = .systemBackground
+            return tempView
+        }()
         
         view.addSubview(newsFinderLabel)
         view.addSubview(enterTermLabel)
@@ -28,45 +89,30 @@ class SearchController: UIViewController {
         centeredView.addArrangedSubview(searchButton)
         
         // News finder label
-        newsFinderLabel.text = "LATESTS NEWS"
-        newsFinderLabel.textColor = .label
-        newsFinderLabel.font = UIFont(name: "Georgia", size: 38)
         newsFinderLabel.snp.makeConstraints {
-            (make) in
+            make in
             make.centerX.equalTo(view)
             make.top.equalTo(view).offset(300)
         }
         
         // Enter term label
-        enterTermLabel.text = "Enter any word to find related news"
-        enterTermLabel.textColor = .label
         enterTermLabel.snp.makeConstraints {
-            (make) in
+            make in
             make.centerX.equalTo(view)
             make.top.equalTo(newsFinderLabel.snp.bottom).offset(50)
         }
         
         // Centered view
-        centeredView.distribution = .equalCentering
-        centeredView.alignment = .center
-        centeredView.axis = .horizontal
         centeredView.snp.makeConstraints {
             make in
-            
             make.left.equalTo(view).offset(Constants.elementsLeft*2)
             make.right.equalTo(view).offset(-Constants.elementsLeft*2)
             make.top.equalTo(enterTermLabel.snp.top).offset(75)
         }
         
         // Term text field
-        termTextField.text = ""
-        termTextField.layer.borderWidth = 1
-        termTextField.layer.cornerRadius = 4
-        termTextField.setLeftPaddingPoints(10)
-        termTextField.setRightPaddingPoints(10)
         termTextField.snp.makeConstraints {
-            (make) in
-            
+            make in
             make.width.equalTo(200)
             make.height.equalTo(34)
         }
@@ -77,11 +123,6 @@ class SearchController: UIViewController {
         }
     
         termTextField.becomeFirstResponder()
-        
-        // Search button
-        searchButton.setTitle("Search", for: .normal)
-        searchButton.setTitleColor(UIColor(named: "buttonColor"), for: .normal)
-        searchButton.addTarget(self, action: #selector(searchButtonWasPressed), for: .touchUpInside)
     }
     
     @objc func searchButtonWasPressed(_ sender: Any) {

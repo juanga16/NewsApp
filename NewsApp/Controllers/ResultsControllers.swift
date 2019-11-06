@@ -16,15 +16,54 @@ class ResultsController: UIViewController {
     var news: [New] = []
     var termToSearch: String = ""
     
-    let newsRelatedToLabel = UILabel(frame: .zero)
-    let termToSearchLabel = UILabel(frame: .zero)
-    let tableView = UITableView(frame: .zero)
-    let activityIndicator = UIActivityIndicatorView(style: .large)
-    let centeredView = UIStackView(frame: .zero)
+    let newsRelatedToLabel : UILabel = {
+        let tempNewsRelatedToLabel = UILabel(frame: .zero)
+        tempNewsRelatedToLabel.text = "News related to:"
+        tempNewsRelatedToLabel.textColor = .label
+        tempNewsRelatedToLabel.font = UIFont.systemFont(ofSize: 20)
+        return tempNewsRelatedToLabel
+    }()
+    
+    let termToSearchLabel : UILabel = {
+        let tempTermToSearchLabel = UILabel(frame: .zero)
+        tempTermToSearchLabel.textColor = .label
+        tempTermToSearchLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        return tempTermToSearchLabel
+    }()
+    
+    let tableView : UITableView = {
+        let tempTableView = UITableView(frame: .zero)
+        tempTableView.rowHeight = UITableView.automaticDimension
+        tempTableView.isHidden = true
+        tempTableView.separatorStyle = .singleLine
+        tempTableView.separatorColor = .secondaryLabel
+        tempTableView.separatorInset = .zero
+        tempTableView.register(NewsViewCell.self, forCellReuseIdentifier: "newsViewCell")
+        return tempTableView
+    }()
+    
+    let activityIndicator : UIActivityIndicatorView = {
+        let tempActivityIndicator = UIActivityIndicatorView(style: .large)
+        tempActivityIndicator.color = .label
+        tempActivityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        return tempActivityIndicator
+    }()
+    
+    let centeredView : UIStackView = {
+        var tempCenteredView = UIStackView(frame: .zero)
+        tempCenteredView.distribution = .equalSpacing
+        tempCenteredView.alignment = .leading
+        tempCenteredView.axis = .horizontal
+        tempCenteredView.isHidden = true
+        return tempCenteredView
+    }()
     
     override func viewDidLoad() {
-        view = UIView()
-        view.backgroundColor = .systemBackground
+        view = {
+            let tempView = UIView()
+            tempView.backgroundColor = .systemBackground
+            return tempView
+        }()
         
         view.addSubview(activityIndicator)
         view.addSubview(centeredView)
@@ -34,36 +73,22 @@ class ResultsController: UIViewController {
         centeredView.addSubview(termToSearchLabel)
        
         // Centered view
-        centeredView.distribution = .equalSpacing
-        centeredView.alignment = .leading
-        centeredView.axis = .horizontal
-        centeredView.isHidden = true
         centeredView.snp.makeConstraints {
             make in
-            
             make.left.equalTo(view).offset(Constants.elementsLeft)
             make.top.equalTo(Constants.fixedTopMargin)
         }
 
         // News related to label
-        newsRelatedToLabel.text = "News related to:"
-        newsRelatedToLabel.textColor = .label
-        termToSearchLabel.font = UIFont.systemFont(ofSize: 20)
-        newsRelatedToLabel.isHidden = true
         newsRelatedToLabel.snp.makeConstraints {
             make in
-            
             make.centerY.left.equalToSuperview()
         }
         
         // Term to search label
         termToSearchLabel.text = termToSearch
-        termToSearchLabel.textColor = .label
-        termToSearchLabel.font = UIFont.boldSystemFont(ofSize: 22)
-        termToSearchLabel.isHidden = true
         termToSearchLabel.snp.makeConstraints {
             make in
-            
             make.left.equalTo(newsRelatedToLabel.snp.right).offset(10)
             make.centerY.equalToSuperview()
         }
@@ -71,33 +96,23 @@ class ResultsController: UIViewController {
         // Table view
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.isHidden = true
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = .secondaryLabel
-        tableView.separatorInset = .zero
-        tableView.register(NewsViewCell.self, forCellReuseIdentifier: "newsViewCell")
         tableView.snp.makeConstraints {
-            (make) in
+            make in
             make.left.equalTo(view).offset(Constants.elementsLeft)
             make.top.equalTo(newsRelatedToLabel.snp.bottom).offset(Constants.elementsTopMargin)
-            make.right.equalTo(view).offset(-Constants.elementsLeft)
+            make.right.equalTo(view).offset(-Constants.elementsLeft / 2)
             make.bottom.equalTo(view.snp.bottom).offset(-Constants.elementsTopMargin)
         }
         
         // Activity indicator
         activityIndicator.snp.makeConstraints {
             make in
-            
             make.centerX.centerY.equalTo(view)
             make.height.width.equalTo(50)
         }
         
-        activityIndicator.color = .label
-        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-        activityIndicator.startAnimating()
-        
         // Get and display results
+        activityIndicator.startAnimating()
         getNews()
     }
 }
