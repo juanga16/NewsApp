@@ -26,7 +26,7 @@
 		72AE884C237321EF002E2B96 /* Nimble.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72AE884A237321EF002E2B96 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		72AE884E237321F2002E2B96 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72AE884D237321F2002E2B96 /* Quick.framework */; };
 		72AE884F237321F2002E2B96 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72AE884D237321F2002E2B96 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		72AE886323732F99002E2B96 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE8859237328F2002E2B96 /* ViewControllerTests.swift */; };
+		72AE886323732F99002E2B96 /* MemoryLeaksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE8859237328F2002E2B96 /* MemoryLeaksTests.swift */; };
 		72AE886423734147002E2B96 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3F923637CA30048D324 /* SearchController.swift */; };
 		72AE88652373421C002E2B96 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256512123675E010068E29D /* UITextField.swift */; };
 		72AE88662373421E002E2B96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7256511E236732690068E29D /* Constants.swift */; };
@@ -34,6 +34,7 @@
 		72AE886823734225002E2B96 /* New.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D40323637DBD0048D324 /* New.swift */; };
 		72AE886923734228002E2B96 /* DetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3F823637CA20048D324 /* DetailsController.swift */; };
 		72AE886A2373422B002E2B96 /* ResultsControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3FA23637CA30048D324 /* ResultsControllers.swift */; };
+		72B0DB5323749FDA004A8584 /* DetailsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B0DB5223749FDA004A8584 /* DetailsControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +85,9 @@
 		72AE884A237321EF002E2B96 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		72AE884D237321F2002E2B96 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		72AE8857237328F1002E2B96 /* NewsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		72AE8859237328F2002E2B96 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
+		72AE8859237328F2002E2B96 /* MemoryLeaksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeaksTests.swift; sourceTree = "<group>"; };
 		72AE885B237328F2002E2B96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72B0DB5223749FDA004A8584 /* DetailsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +209,8 @@
 		72AE8858237328F2002E2B96 /* NewsAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				72AE8859237328F2002E2B96 /* ViewControllerTests.swift */,
+				72B0DB5223749FDA004A8584 /* DetailsControllerTests.swift */,
+				72AE8859237328F2002E2B96 /* MemoryLeaksTests.swift */,
 				72AE885B237328F2002E2B96 /* Info.plist */,
 			);
 			path = NewsAppTests;
@@ -358,10 +361,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				72AE886923734228002E2B96 /* DetailsController.swift in Sources */,
-				72AE886323732F99002E2B96 /* ViewControllerTests.swift in Sources */,
+				72AE886323732F99002E2B96 /* MemoryLeaksTests.swift in Sources */,
 				72AE886423734147002E2B96 /* SearchController.swift in Sources */,
 				72AE886723734221002E2B96 /* NewsViewCell.swift in Sources */,
 				72AE886A2373422B002E2B96 /* ResultsControllers.swift in Sources */,
+				72B0DB5323749FDA004A8584 /* DetailsControllerTests.swift in Sources */,
 				72AE88652373421C002E2B96 /* UITextField.swift in Sources */,
 				72AE886823734225002E2B96 /* New.swift in Sources */,
 				72AE88662373421E002E2B96 /* Constants.swift in Sources */,

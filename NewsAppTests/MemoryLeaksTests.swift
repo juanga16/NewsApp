@@ -6,11 +6,11 @@
 //  Copyright © 2019 Cosme Fulanito. All rights reserved.
 //
 
-import Nimble
 import Quick
+import Nimble
 import SpecLeaks
 
-class ViewControllerTests: QuickSpec {
+class MemoryLeaksTests: QuickSpec {
     override func spec() {
         describe("SearchControllerTest") {
             describe("viewDidLoad") {
