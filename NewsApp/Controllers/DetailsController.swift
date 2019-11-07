@@ -10,7 +10,9 @@ import UIKit
 import SnapKit
 
 class DetailsController: UIViewController {
-    var newToShow: New!
+    var newToShow : New?
+    
+    let operationQueue = OperationQueue()
     
     let scrollView = UIScrollView()
     let containerView = UIView()
@@ -97,50 +99,53 @@ class DetailsController: UIViewController {
             make.height.equalTo(0)
         }
         
-        if newToShow.urlToImage != "" {
-            loadImage(urlToImage: newToShow.urlToImage)
-        } else {
+        guard let urlToImage = newToShow?.urlToImage, urlToImage != "" else {
             updateRestOfElements()
+            return
         }
+        
+        loadImage(urlToImage)
     }
 }
 
 extension DetailsController {
     
-    func loadImage(urlToImage: String) {
+    func loadImage(_ urlToImage: String) {
         guard let imageUrl = URL(string: urlToImage) else {
             return
         }
-        
-        let cache = URLCache.shared
-        let request = URLRequest(url: imageUrl)
-        
+
         DispatchQueue.global(qos: .userInitiated).async {
-            if let data = cache.cachedResponse(for: request)?.data, let image = UIImage(data: data) {
+            [unowned self] in
+            let cache = URLCache()
+            let request = URLRequest(url: imageUrl)
+                
+            if let cachedData = cache.cachedResponse(for: request), let image = UIImage(data: cachedData.data) {
                 print("Loading Cached Image")
                 self.showImage(image: image)
             } else {
+             
                 print("Downloading Image")
-                URLSession.shared.dataTask(with: request) {
+                
+                let session = URLSession(configuration: .ephemeral)
+                let task = session.dataTask(with: request, completionHandler: {
                     data, response, error in
-                    
-                    if error != nil {
-                        return
-                    }
-                    
-                    if let data = data, let image = UIImage(data: data) {
-                        let cachedData = CachedURLResponse(response: response!, data: data)
+                   
+                    if let data = data, let image = UIImage(data: data), let response = response {
+                        let cachedData = CachedURLResponse(response: response, data: data)
                         cache.storeCachedResponse(cachedData, for: request)
                         
                         self.showImage(image: image)
                     }
-                }.resume()
+                })
+                task.resume()
+                session.finishTasksAndInvalidate()
             }
         }
     }
     
     func showImage(image: UIImage) {
-        DispatchQueue.main.async() {
+        DispatchQueue.main.async {
             let widthRelation = image.size.width / self.imageView.frame.width
             let imageHeight = image.size.height / widthRelation
             
@@ -156,8 +161,10 @@ extension DetailsController {
     }
     
     func updateRestOfElements() {
+        guard let new = newToShow else { return }
+        
         // Title label
-        titleLabel.text = newToShow.title
+        titleLabel.text = new.title
         titleLabel.snp.updateConstraints {
             make in
             make.left.equalTo(view).offset(Constants.elementsLeft)
@@ -166,7 +173,7 @@ extension DetailsController {
         }
         
         // Description label
-        descriptionLabel.text = newToShow.description
+        descriptionLabel.text = new.description
         descriptionLabel.snp.updateConstraints {
             make in
             make.left.equalTo(view).offset(Constants.elementsLeft)
@@ -175,7 +182,7 @@ extension DetailsController {
         }
         
         // Author label
-        authorLabel.text = newToShow.author
+        authorLabel.text = new.author
         authorLabel.snp.updateConstraints {
             make in
             make.left.equalTo(view).offset(Constants.elementsLeft)
@@ -186,7 +193,7 @@ extension DetailsController {
         // Published at label
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM-dd HH:mm"
-        publishedAtLabel.text = dateFormatter.string(from: newToShow.publishedAt)
+        publishedAtLabel.text = dateFormatter.string(from: new.publishedAt)
         publishedAtLabel.snp.updateConstraints {
             make in
             make.right.equalTo(view).offset(-Constants.elementsLeft)
@@ -194,7 +201,7 @@ extension DetailsController {
         }
         
         // Content label
-        contentLabel.text = newToShow.content
+        contentLabel.text = new.content
         contentLabel.snp.updateConstraints {
             make in
             make.left.equalTo(view).offset(Constants.elementsLeft)

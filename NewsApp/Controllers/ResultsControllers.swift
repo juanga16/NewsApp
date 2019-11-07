@@ -190,6 +190,7 @@ extension ResultsController {
         let url = "https://newsapi.org/v2/everything?q=" + termToSearch + "&language=en&pageSize=30&sortBy=publishedAt&apiKey=47a45430a0464d54baef451246447424"
         
         Alamofire.request(url, method: .get).responseJSON {
+            [unowned self]
             response in
             
             if response.result.isSuccess {
@@ -210,15 +211,19 @@ extension ResultsController {
                 }
                 
                 if self.news.count > 0 {
-                    DispatchQueue.main.async {
-                        self.activityIndicator.stopAnimating()
-                        self.centeredView.isHidden = false
-                        self.tableView.isHidden = false
-                        
-                        self.tableView.reloadData()
-                    }
+                    self.afterObtainedData()
                 }
             }
+        }
+    }
+    
+    func afterObtainedData() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.centeredView.isHidden = false
+            self.tableView.isHidden = false
+        
+            self.tableView.reloadData()
         }
     }
     
