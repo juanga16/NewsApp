@@ -1,6 +1,6 @@
 //
 //  SearchController.swift
-//  getYourNews
+//  NewsApp
 //
 //  Created by Cosme Fulanito on 14/10/2019.
 //  Copyright © 2019 Cosme Fulanito. All rights reserved.
@@ -33,7 +33,6 @@ class SearchController: UIViewController {
         tempTermTextField.setLeftPaddingPoints(10)
         tempTermTextField.setRightPaddingPoints(10)
         return tempTermTextField
-        
     }()
     
     let searchButton : UIButton = {
@@ -44,12 +43,28 @@ class SearchController: UIViewController {
         return tempSearchButton
     }()
     
-    let centeredView : UIStackView = {
-        let tempCenteredView = UIStackView(frame: .zero)
-        tempCenteredView.distribution = .equalCentering
-        tempCenteredView.alignment = .center
-        tempCenteredView.axis = .horizontal
-        return tempCenteredView
+    let centeredTopView : UIStackView = {
+        let tempCenteredTopView = UIStackView(frame: .zero)
+        tempCenteredTopView.distribution = .equalCentering
+        tempCenteredTopView.alignment = .center
+        tempCenteredTopView.axis = .horizontal
+        return tempCenteredTopView
+    }()
+    
+    let historicalSearchesButton : UIButton = {
+        let tempHistoricalSearchesButton = UIButton(frame: .zero)
+        tempHistoricalSearchesButton.setTitle("Historical Searches", for: .normal)
+        tempHistoricalSearchesButton.setTitleColor(UIColor(named: "buttonColor"), for: .normal)
+        tempHistoricalSearchesButton.addTarget(self, action: #selector(historicalSearchesButtonWasPressed), for: .touchUpInside)
+        return tempHistoricalSearchesButton
+    }()
+    
+    let centeredBottomView : UIStackView = {
+        let tempCenteredBottomView = UIStackView(frame: .zero)
+        tempCenteredBottomView.distribution = .equalCentering
+        tempCenteredBottomView.alignment = .center
+        tempCenteredBottomView.axis = .horizontal
+        return tempCenteredBottomView
     }()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,10 +98,13 @@ class SearchController: UIViewController {
         
         view.addSubview(newsFinderLabel)
         view.addSubview(enterTermLabel)
-        view.addSubview(centeredView)
+        view.addSubview(centeredTopView)
+        view.addSubview(centeredBottomView)
         
-        centeredView.addArrangedSubview(termTextField)
-        centeredView.addArrangedSubview(searchButton)
+        centeredTopView.addArrangedSubview(termTextField)
+        centeredTopView.addArrangedSubview(searchButton)
+        
+        centeredBottomView.addArrangedSubview(historicalSearchesButton)
         
         // News finder label
         newsFinderLabel.snp.makeConstraints {
@@ -102,8 +120,8 @@ class SearchController: UIViewController {
             make.top.equalTo(newsFinderLabel.snp.bottom).offset(50)
         }
         
-        // Centered view
-        centeredView.snp.makeConstraints {
+        // Centered Top view
+        centeredTopView.snp.makeConstraints {
             make in
             make.left.equalTo(view).offset(Constants.elementsLeft*2)
             make.right.equalTo(view).offset(-Constants.elementsLeft*2)
@@ -123,6 +141,14 @@ class SearchController: UIViewController {
         }
     
         termTextField.becomeFirstResponder()
+        
+        // Centered Bottom view
+        centeredBottomView.snp.makeConstraints {
+            make in
+            make.left.equalTo(view).offset(Constants.elementsLeft)
+            make.right.equalTo(view).offset(-Constants.elementsLeft)
+            make.top.equalTo(centeredTopView.snp.top).offset(75)
+        }
     }
     
     @objc func searchButtonWasPressed(_ sender: Any) {
@@ -145,5 +171,11 @@ class SearchController: UIViewController {
         resultsController.termToSearch = termTextField.text!
           
         self.navigationController?.pushViewController(resultsController, animated: true)
+    }
+    
+    @objc func historicalSearchesButtonWasPressed(_ sender: Any) {
+        let historicalSearchesController = HistoricalSearchesController()
+        
+        self.navigationController?.pushViewController(historicalSearchesController, animated: true)
     }
 }

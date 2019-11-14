@@ -1,6 +1,6 @@
 //
 //  New.swift
-//  getYourNews
+//  NewsApp
 //
 //  Created by Cosme Fulanito on 14/10/2019.
 //  Copyright © 2019 Cosme Fulanito. All rights reserved.

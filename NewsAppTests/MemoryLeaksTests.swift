@@ -62,5 +62,17 @@ class MemoryLeaksTests: QuickSpec {
                 }
             }
         }
+        
+        describe("HistorialSearchesControllerTest") {
+            describe("viewDidLoad") {
+               it("must no leak") {
+                   let test = LeakTest {
+                       return HistoricalSearchesController()
+                   }
+           
+                   expect(test).toNot(leak())
+               }
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 //
 //  NewsViewsCell.swift
-//  getYourNews
+//  NewsApp
 //
 //  Created by Cosme Fulanito on 14/10/2019.
 //  Copyright © 2019 Cosme Fulanito. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 import SwipeCellKit
 import SnapKit
 
-class NewsViewCell: SwipeTableViewCell {
+class NewViewCell: SwipeTableViewCell {
 
     let container = UIView()
     let titleLabel : UILabel = {
@@ -26,6 +26,7 @@ class NewsViewCell: SwipeTableViewCell {
         let tempPublishedAtLabel = UILabel(frame: .zero)
         tempPublishedAtLabel.textAlignment = .right
         tempPublishedAtLabel.textColor = .label
+        tempPublishedAtLabel.font = UIFont.boldSystemFont(ofSize: 14)
         return tempPublishedAtLabel
     }()
     

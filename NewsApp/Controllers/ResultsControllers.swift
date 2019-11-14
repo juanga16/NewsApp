@@ -1,6 +1,6 @@
 //
 //  ResultsController.swift
-//  getYourNews
+//  NewsApp
 //
 //  Created by Cosme Fulanito on 14/10/2019.
 //  Copyright © 2019 Cosme Fulanito. All rights reserved.
@@ -38,7 +38,7 @@ class ResultsController: UIViewController {
         tempTableView.separatorStyle = .singleLine
         tempTableView.separatorColor = .secondaryLabel
         tempTableView.separatorInset = .zero
-        tempTableView.register(NewsViewCell.self, forCellReuseIdentifier: "newsViewCell")
+        tempTableView.register(NewViewCell.self, forCellReuseIdentifier: "newViewCell")
         return tempTableView
     }()
     
@@ -114,6 +114,18 @@ class ResultsController: UIViewController {
         // Get and display results
         activityIndicator.startAnimating()
         getNews()
+        
+        // Customiza back button to go back always to root
+        navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(backButtonWasPressed))
+        navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc func backButtonWasPressed(_ sender: Any) {
+        let searchController = SearchController()
+        navigationController?.setViewControllers([searchController], animated: true)
+        
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -123,7 +135,7 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newsViewCell") as! NewsViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newViewCell") as! NewViewCell
         let new = news[indexPath.row]
         
         cell.delegate = self
@@ -187,7 +199,7 @@ extension ResultsController: UITableViewDelegate, UITableViewDataSource, SwipeTa
 extension ResultsController {
     
     func getNews() {
-        let url = "https://newsapi.org/v2/everything?q=" + termToSearch + "&language=en&pageSize=30&sortBy=publishedAt&apiKey=47a45430a0464d54baef451246447424"
+        let url = "https://newsapi.org/v2/everything?q=" + termToSearch + "&language=en&sortBy=publishedAt&apiKey=47a45430a0464d54baef451246447424"
         
         Alamofire.request(url, method: .get).responseJSON {
             [unowned self]
@@ -213,6 +225,8 @@ extension ResultsController {
                 if self.news.count > 0 {
                     self.afterObtainedData()
                 }
+                
+                CoreDataHelper.shared.saveHistoricalSearch(term: self.termToSearch, results: self.news.count)
             }
         }
     }
