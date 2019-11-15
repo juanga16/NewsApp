@@ -125,7 +125,7 @@ extension HistoricalSearchesController: UITableViewDelegate, UITableViewDataSour
             let deleteAction = SwipeAction(style: .destructive, title: "Remove") {
                 action, indexPath in
                 
-                CoreDataHelper.shared.deleteHistoricalSearch(historicalSearch: self.historicalSearches[indexPath.row])
+                CoreDataManager.shared.deleteHistoricalSearch(historicalSearch: self.historicalSearches[indexPath.row])
                 self.historicalSearches.remove(at: indexPath.row)
                 
                 DispatchQueue.main.async {
@@ -155,8 +155,11 @@ extension HistoricalSearchesController: UITableViewDelegate, UITableViewDataSour
 extension HistoricalSearchesController {
     
     func getHistoricalSearches() {
-        historicalSearches = CoreDataHelper.shared.getHistoricalSearches()
-        afterObtainedData()
+        historicalSearches = CoreDataManager.shared.getHistoricalSearches()
+        
+        if historicalSearches.count > 0 {
+            afterObtainedData()
+        }
     }
     
     func afterObtainedData() {

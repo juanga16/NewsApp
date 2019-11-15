@@ -226,7 +226,7 @@ extension ResultsController {
                     self.afterObtainedData()
                 }
                 
-                CoreDataHelper.shared.saveHistoricalSearch(term: self.termToSearch, results: self.news.count)
+                CoreDataManager.shared.saveHistoricalSearch(term: self.termToSearch, results: self.news.count)
             }
         }
     }

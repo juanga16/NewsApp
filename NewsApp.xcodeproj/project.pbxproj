@@ -37,9 +37,9 @@
 		72B0DB5323749FDA004A8584 /* DetailsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B0DB5223749FDA004A8584 /* DetailsControllerTests.swift */; };
 		72E8C9FF237C2A7E00C77908 /* HistoricalSearchesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E8C9FE237C2A7E00C77908 /* HistoricalSearchesController.swift */; };
 		72E8CA03237C43E700C77908 /* HistoricalSearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E8CA02237C43E700C77908 /* HistoricalSearchViewCell.swift */; };
-		72E8CA06237C4E0D00C77908 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E8CA05237C4E0D00C77908 /* CoreDataHelper.swift */; };
+		72E8CA06237C4E0D00C77908 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E8CA05237C4E0D00C77908 /* CoreDataManager.swift */; };
 		72E8CA07237C98ED00C77908 /* HistoricalSearchesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E8C9FE237C2A7E00C77908 /* HistoricalSearchesController.swift */; };
-		72E8CA08237C98F200C77908 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E8CA05237C4E0D00C77908 /* CoreDataHelper.swift */; };
+		72E8CA08237C98F200C77908 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E8CA05237C4E0D00C77908 /* CoreDataManager.swift */; };
 		72E8CA09237C98F800C77908 /* HistoricalSearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E8CA02237C43E700C77908 /* HistoricalSearchViewCell.swift */; };
 		72E8CA0A237C999D00C77908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3D7236366820048D324 /* AppDelegate.swift */; };
 		72E8CA0B237C99A100C77908 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72A6D3DE236366820048D324 /* NewsApp.xcdatamodeld */; };
@@ -98,7 +98,7 @@
 		72B0DB5223749FDA004A8584 /* DetailsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsControllerTests.swift; sourceTree = "<group>"; };
 		72E8C9FE237C2A7E00C77908 /* HistoricalSearchesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalSearchesController.swift; sourceTree = "<group>"; };
 		72E8CA02237C43E700C77908 /* HistoricalSearchViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalSearchViewCell.swift; sourceTree = "<group>"; };
-		72E8CA05237C4E0D00C77908 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		72E8CA05237C4E0D00C77908 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				7256511E236732690068E29D /* Constants.swift */,
-				72E8CA05237C4E0D00C77908 /* CoreDataHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -140,6 +139,14 @@
 				7256512123675E010068E29D /* UITextField.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7295D03A237ECD6E005D2309 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				72E8CA05237C4E0D00C77908 /* CoreDataManager.swift */,
+			);
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		72A6D3CB236366820048D324 = {
@@ -164,6 +171,7 @@
 		72A6D3D6236366820048D324 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				7295D03A237ECD6E005D2309 /* DataManager */,
 				7256512023675DD00068E29D /* Extensions */,
 				7256511D2367322B0068E29D /* Helpers */,
 				72A6D40223637D3E0048D324 /* Views */,
@@ -365,7 +373,7 @@
 				72E8CA03237C43E700C77908 /* HistoricalSearchViewCell.swift in Sources */,
 				72A6D3FC23637CA30048D324 /* SearchController.swift in Sources */,
 				72A6D3D8236366820048D324 /* AppDelegate.swift in Sources */,
-				72E8CA06237C4E0D00C77908 /* CoreDataHelper.swift in Sources */,
+				72E8CA06237C4E0D00C77908 /* CoreDataManager.swift in Sources */,
 				72A6D40623637DC80048D324 /* NewViewCell.swift in Sources */,
 				72A6D3FD23637CA30048D324 /* ResultsControllers.swift in Sources */,
 				72A6D3E0236366820048D324 /* NewsApp.xcdatamodeld in Sources */,
@@ -388,7 +396,7 @@
 				72B0DB5323749FDA004A8584 /* DetailsControllerTests.swift in Sources */,
 				72E8CA0A237C999D00C77908 /* AppDelegate.swift in Sources */,
 				72AE88652373421C002E2B96 /* UITextField.swift in Sources */,
-				72E8CA08237C98F200C77908 /* CoreDataHelper.swift in Sources */,
+				72E8CA08237C98F200C77908 /* CoreDataManager.swift in Sources */,
 				72AE886823734225002E2B96 /* New.swift in Sources */,
 				72AE88662373421E002E2B96 /* Constants.swift in Sources */,
 			);
