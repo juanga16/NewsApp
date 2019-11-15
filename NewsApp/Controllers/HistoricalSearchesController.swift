@@ -164,6 +164,7 @@ extension HistoricalSearchesController {
     
     func afterObtainedData() {
         DispatchQueue.main.async {
+            [unowned self] in
             self.activityIndicator.stopAnimating()
             self.centeredView.isHidden = false
             self.tableView.isHidden = false
